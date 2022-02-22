@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_account"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                tools:text="Текст" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners"
+                android:padding="7dp"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/alt_text_background"
+                android:padding="7dp"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                tools:text="ВЫЩлмывзащшмлхмушком-цукш оцу-кпшцуокп9уцшом ц-укш9омц умшьцумкшцу мтцу-амкту м" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

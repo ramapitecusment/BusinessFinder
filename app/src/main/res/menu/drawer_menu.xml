@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profileFragment"
+        android:enabled="true"
+        android:title="Личный кабинет" />
+    <item
+        android:id="@+id/categoryFragment"
+        android:enabled="true"
+        android:title="Категории" />
+    <item
+        android:id="@+id/requestFragment"
+        android:enabled="true"
+        android:title="Заявки" />
+    <item
+        android:id="@+id/offerFragment"
+        android:enabled="true"
+        android:title="Предложения" />
+    <item
+        android:id="@+id/chatFragment"
+        android:enabled="true"
+        android:title="Чат" />
+    <item
+        android:id="@+id/analysisFragment"
+        android:enabled="true"
+        android:title="Анализ" />
+
+</menu>

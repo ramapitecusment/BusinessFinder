@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Business Finder</string>
+    <string name="offer_respond">На вашу заявку откликнулись %1$d предприятии </string>
+    <string name="offer_accepted">%1$d процентов запросов было принято</string>
+</resources>

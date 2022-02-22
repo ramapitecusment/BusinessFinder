@@ -1,0 +1,100 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BusinessFinder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorAccent</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.BusinessFinder.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.BusinessFinder</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.Text" parent="Theme.BusinessFinder">
+        <item name="android:fontFamily">@font/text_me_one</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.TitleText" parent="Theme.BusinessFinder.Text">
+        <item name="android:textColor">@color/title_text_color</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.ToolbarText" parent="Theme.BusinessFinder.Text">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.DescriptionText" parent="Theme.BusinessFinder.Text">
+        <item name="android:textColor">@color/description_text_color</item>
+    </style>
+
+    <!--  LoginTextInputLayout  -->
+    <style name="Theme.BusinessFinder.TitleText.LoginTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginStart">@dimen/default_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/default_margin_horizontal</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="boxCornerRadiusBottomEnd">30dp</item>
+        <item name="boxCornerRadiusBottomStart">30dp</item>
+        <item name="boxCornerRadiusTopEnd">30dp</item>
+        <item name="boxCornerRadiusTopStart">30dp</item>
+        <item name="boxStrokeColor">@color/edit_text_color</item>
+        <item name="hintTextColor">@color/edit_text_color</item>
+        <item name="errorTextAppearance">
+            @style/Theme.BusinessFinder.LoginTextInputLayout.ErrorTextAppearance
+        </item>
+        <item name="hintTextAppearance">
+            @style/Theme.BusinessFinder.LoginTextInputLayout.HintTextAppearance
+        </item>
+    </style>
+
+    <style name="Theme.BusinessFinder.LoginTextInputLayout.ErrorTextAppearance" parent="Theme.BusinessFinder.Text">
+        <item name="android:textColor">@color/grapefruit</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.LoginTextInputLayout.HintTextAppearance" parent="Theme.BusinessFinder.Text">
+        <item name="android:textColor">@color/edit_text_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.Button">
+        <item name="shapeAppearanceOverlay">@style/Theme.BusinessFinder.Button.Shape</item>
+        <item name="backgroundColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:fontFamily">@font/text_me_one</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="shapeAppearanceOverlay">@style/Theme.BusinessFinder.Button.Shape</item>
+        <item name="strokeColor">@color/colorAccent</item>
+        <item name="cornerSize">15dp</item>
+    </style>
+
+
+    <style name="Theme.BusinessFinder.Button.Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Theme.BusinessFinder.TitleText.TitleStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
