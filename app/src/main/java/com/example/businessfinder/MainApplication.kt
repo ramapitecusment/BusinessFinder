@@ -14,6 +14,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@MainApplication)
@@ -26,5 +27,9 @@ class MainApplication : Application() {
                 )
             )
         }
+    }
+
+    companion object {
+        lateinit var instance: MainApplication
     }
 }

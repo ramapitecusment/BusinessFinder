@@ -9,5 +9,17 @@
         android:id="@+id/loginFragment"
         android:name="com.example.businessfinder.scenes.login.LoginFragment"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.businessfinder.scenes.registration.RegistrationFragment"
+        tools:layout="@layout/fragment_registration" />
+    <fragment
+        android:id="@+id/chatChannelsFragment"
+        android:name="com.example.businessfinder.scenes.chat.chatchannels.ChatChannelsFragment"
+        tools:layout="@layout/fragment_chat_channels" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.businessfinder.scenes.chat.ChatFragment"
+        tools:layout="@layout/fragment_chat" />
 
 </navigation>

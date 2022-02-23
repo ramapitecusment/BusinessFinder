@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "506873462471",
+    "project_id": "business-finder-21ea3",
+    "storage_bucket": "business-finder-21ea3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506873462471:android:18a91c668abf0b1e72c8e2",
+        "android_client_info": {
+          "package_name": "com.example.businessfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506873462471-3e6m6flhp91riqa48tfn78dq35257big.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.businessfinder",
+            "certificate_hash": "3f31c4157be4e832358666aa86c78c829b5a72e0"
+          }
+        },
+        {
+          "client_id": "506873462471-mes010gtv1nf6drtoo442h4qjsur96f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0uKG-3vM7FtWQQmuhFf8Na0UL5mfkDuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506873462471-mes010gtv1nf6drtoo442h4qjsur96f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,4 +2,12 @@
     <string name="app_name">Business Finder</string>
     <string name="offer_respond">На вашу заявку откликнулись %1$d предприятии </string>
     <string name="offer_accepted">%1$d процентов запросов было принято</string>
+
+
+    <string name="scr_any_msg_error_no_connection">Возникла ошибка при подключении к Интернету</string>
+    <string name="scr_any_msg_error_timeout">Невозможно установить соединение с сервером</string>
+    <string name="scr_any_msg_error_access_denied_message">У вас нет доступа к этой странице</string>
+    <string name="scr_any_msg_unknown_error">Непредвиденная ошибка</string>
+
+
 </resources>

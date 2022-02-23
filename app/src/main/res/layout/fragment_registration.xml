@@ -1,104 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/default_margin_horizontal"
-    android:orientation="vertical">
+    android:layout_marginHorizontal="@dimen/default_margin_horizontal">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Название предприятия"
-            android:inputType="textPersonName"
-            tools:text="Название предприятия" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Название предприятия"
+                android:inputType="textPersonName"
+                tools:text="Название предприятия" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Сфера деятельности"
-            android:inputType="textMultiLine"
-            tools:text="Сфера деятельности" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Сфера деятельности"
+                android:inputType="textMultiLine"
+                tools:text="Сфера деятельности" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="БИН предприятия"
-            android:inputType="number"
-            tools:text="БИН предприятия" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="БИН предприятия"
+                android:inputType="number"
+                tools:text="БИН предприятия" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Почта"
-            android:inputType="textEmailAddress"
-            tools:text="Почта" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Почта"
+                android:inputType="textEmailAddress"
+                tools:text="Почта" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPhone"
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Пароль"
-            android:inputType="textPassword"
-            tools:text="Пароль" />
+            android:layout_height="wrap_content"
+            app:prefixText="+7 ">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Phone number"
+                android:inputType="phone"
+                tools:text="7002401212" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Подтвердите пароль"
-            android:inputType="textPassword"
-            tools:text="Пароль" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Пароль"
+                android:inputType="textPassword"
+                tools:text="Пароль" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signInButton"
-        style="@style/Theme.BusinessFinder.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:text="Зарегестрироваться" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Подтвердите пароль"
+                android:inputType="textPassword"
+                tools:text="Пароль" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInButton"
+            style="@style/Theme.BusinessFinder.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:text="Зарегестрироваться" />
+
+    </LinearLayout>
+</ScrollView>
