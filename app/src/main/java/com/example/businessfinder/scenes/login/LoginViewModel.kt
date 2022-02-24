@@ -18,11 +18,11 @@ class LoginViewModel(
     val emailFlow = MutableStateFlow("")
     val passwordFlow = MutableStateFlow("")
 
-    val emailErrorFlow = MutableStateFlow("")
-    val passwordErrorFlow = MutableStateFlow("")
+    val emailErrorFlow = MutableStateFlow<String?>(null)
+    val passwordErrorFlow = MutableStateFlow<String?>(null)
 
+    val navigateProfileScreen = MutableSharedFlow<Unit>()
     val navigateRegistrationScreen = MutableSharedFlow<Unit>()
-    val navigateMainScreen = MutableSharedFlow<Unit>()
 
     fun onSignInClicked() {
         ioScope.launch {
@@ -44,7 +44,7 @@ class LoginViewModel(
     }
 
     private fun signInSuccess() {
-        navigateMainScreen.tryEmit(Unit)
+        navigateProfileScreen.tryEmit(Unit)
     }
 
     private fun signInFailure(e: Throwable) {

@@ -1,66 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/default_margin_horizontal"
-    android:background="#FFF"
-    android:orientation="vertical">
+    android:paddingHorizontal="@dimen/default_margin_horizontal"
+    android:background="#FFF">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/logo_login"
-        tools:ignore="ContentDescription" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tieLogin"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Login"
-            android:inputType="textPersonName"
-            tools:text="Login" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/logo_login"
+            tools:ignore="ContentDescription" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiePassword"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Password"
-            android:inputType="textPassword"
-            tools:text="Password" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieLogin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Login"
+                android:inputType="textPersonName"
+                tools:text="Login" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signInButton"
-        style="@style/Theme.BusinessFinder.Button"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="Войти" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/signUpButton"
-        style="@style/Theme.BusinessFinder.ToolbarText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:text="Создать аккаунт"
-        android:textSize="15sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.BusinessFinder.TitleText.LoginTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiePassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:inputType="textPassword"
+                tools:text="Password" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInButton"
+            style="@style/Theme.BusinessFinder.Button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:text="Войти" />
+
+        <TextView
+            android:id="@+id/signUpButton"
+            style="@style/Theme.BusinessFinder.ToolbarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Создать аккаунт"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+</ScrollView>

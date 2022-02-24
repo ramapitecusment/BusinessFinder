@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import com.example.businessfinder.models.Result
+import java.lang.NullPointerException
 
 class UserService(
     private val auth: FirebaseAuth,
@@ -16,6 +17,7 @@ class UserService(
 
     private val TAG: String = this::class.java.name
     var user: FirebaseUser? = auth.currentUser
+    val currentUserDocRef = db.document("users/${auth.currentUser?.uid ?: throw NullPointerException("User UID is null")}")
 
     // https://betterprogramming.pub/how-to-use-kotlin-coroutines-with-firebase-6f8577a3e00f
     suspend fun createUser(user: User): Result<Unit> =

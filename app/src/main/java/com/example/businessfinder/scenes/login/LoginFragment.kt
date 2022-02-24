@@ -41,6 +41,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
                 bind(emailErrorFlow) { tieLogin.error = it }
                 bind(passwordErrorFlow) { tiePassword.error = it }
                 bindAction(navigateRegistrationScreen) { Navigator.goToRegistrationScreen(this@LoginFragment) }
+                bindAction(navigateProfileScreen) { Navigator.goToProfileScreen(this@LoginFragment) }
             }
         }
     }

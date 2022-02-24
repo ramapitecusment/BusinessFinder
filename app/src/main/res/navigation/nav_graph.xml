@@ -21,5 +21,10 @@
         android:id="@+id/chatFragment"
         android:name="com.example.businessfinder.scenes.chat.ChatFragment"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.businessfinder.scenes.profile.ProfileFragment"
+        android:label="Личный кабинет"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

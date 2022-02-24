@@ -1,13 +1,19 @@
 package com.example.businessfinder.common.extensions
 
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
+
+fun Fragment.bindText(stateFlow: StateFlow<String>, textView: TextView) =
+    stateFlow.onEach {
+        textView.text = it
+    }.launchWhenStarted(viewLifecycleOwner)
 
 inline fun <T> Fragment.bind(stateFlow: StateFlow<T>, crossinline block: (T) -> Unit) =
     stateFlow.onEach { value ->
@@ -51,3 +57,9 @@ fun Fragment.bindTextTwoWay(stateFlow: MutableStateFlow<String>, editText: EditT
         }
     }.launchWhenStarted(viewLifecycleOwner)
 }
+
+fun Fragment.bindImage(
+    stateFlow: StateFlow<String>,
+    imageView: ImageView
+) = stateFlow.onEach { imageView.glideImage(it) }
+    .launchWhenStarted(viewLifecycleOwner)

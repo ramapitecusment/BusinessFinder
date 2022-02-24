@@ -11,4 +11,5 @@ val repositoryModule = module {
     single { UserService(get(), get()) }
     single { FirebaseAuth.getInstance() }
     single { Firebase.firestore }
+
 }
