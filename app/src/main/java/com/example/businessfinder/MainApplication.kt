@@ -9,6 +9,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import org.koin.dsl.module
 
 class MainApplication : Application() {
 
@@ -16,9 +17,9 @@ class MainApplication : Application() {
         super.onCreate()
         instance = this
         startKoin {
-            androidLogger(Level.DEBUG)
+            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@MainApplication)
-            koin.loadModules(
+            modules(
                 listOf(
                     viewModelModule,
                     repositoryModule,

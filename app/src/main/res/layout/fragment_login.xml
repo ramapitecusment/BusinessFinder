@@ -20,6 +20,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tieLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Login"
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiePassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Password"

@@ -1,58 +1,54 @@
 package com.example.businessfinder.services
 
 import android.util.Log
+import com.example.businessfinder.common.Constants.KEY_USERS_COLLECTION
 import com.example.businessfinder.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
+import com.example.businessfinder.models.Result
 
-class UserService {
+class UserService(
+    private val auth: FirebaseAuth,
+    private val db: FirebaseFirestore
+) {
 
     private val TAG: String = this::class.java.name
-    private var auth = FirebaseAuth.getInstance()
     var user: FirebaseUser? = auth.currentUser
 
-    suspend fun createUser(user: User): Result<String> = withContext(Dispatchers.IO) {
-        return@withContext suspendCoroutine { cont ->
-            auth.createUserWithEmailAndPassword(user.email, user.password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "createUserWithEmail:success")
-                    this@UserService.user = auth.currentUser
-                    updateUser(user)
-                    cont.resume(Result.success("Success"))
-                } else {
-                    Log.e(TAG, "createUserWithEmail:failure", task.exception);
-                    cont.resume(Result.failure(task.exception ?: Throwable("${task.result}")))
-                }
-            }
+    // https://betterprogramming.pub/how-to-use-kotlin-coroutines-with-firebase-6f8577a3e00f
+    suspend fun createUser(user: User): Result<Unit> =
+        try {
+            auth.createUserWithEmailAndPassword(user.email, user.password).await()
+            Log.d(TAG, "createUser success: ${this.user}")
+            insertUserData(user)
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Log.e(TAG, "createUser failure", e);
+            Result.Failure(e)
+        }
+
+    suspend fun signInUser(email: String, password: String): Result<Unit> {
+        return try {
+            auth.signInWithEmailAndPassword(email, password).await()
+            Log.d(TAG, "logInWithEmail success: ${this.user?.uid}")
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Log.d(TAG, "logInWithEmail exception: ${e.message}")
+            Result.Failure(e)
         }
     }
 
 
-    suspend fun signInUser(email: String, password: String): Result<String> = withContext(Dispatchers.IO) {
-        return@withContext suspendCoroutine { cont ->
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithEmail:success")
-                    user = auth.currentUser
-                    cont.resume(Result.success("Success"))
-                } else {
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    cont.resume(Result.failure(task.exception ?: Throwable("${task.result}")))
-                }
-            }
+    suspend fun insertUserData(user: User) {
+        try {
+            val data = db.collection(KEY_USERS_COLLECTION).document(user.id).set(user).await()
+            Log.d(TAG, "insertUserData success: $data")
+        } catch (e: Exception) {
+            Log.d(TAG, "insertUserData exception: $e")
         }
+
     }
 
-    suspend fun updateUser(user: User) {
-        this.user?.updateProfile(userData(user))?.addOnCompleteListener {
-
-        }
-    }
-
-    private fun userData(user: User) = UserProfileChangeRequest.Builder().setDisplayName(user.companyName).build()
 }
