@@ -13,6 +13,7 @@ import com.example.businessfinder.common.Navigator.goToLoginScreen
 import com.example.businessfinder.common.Navigator.goToProfileScreenClearingStack
 import com.example.businessfinder.databinding.ActivityMainBinding
 import com.example.businessfinder.services.UserService
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             .setOpenableLayout(binding.drawer)
             .build()
         navController?.let { binding.toolbar.setupWithNavController(it, appBarConfiguration) }
-
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbar.isVisible = destination.id != R.id.loginFragment
         }
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (userService.user != null) goToProfileScreenClearingStack(navController!!)
+        if (FirebaseAuth.getInstance().currentUser != null) goToProfileScreenClearingStack(navController!!)
         else goToLoginScreen(navController!!)
     }
 }

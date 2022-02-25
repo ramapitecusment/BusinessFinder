@@ -9,5 +9,8 @@
     <string name="scr_any_msg_error_access_denied_message">У вас нет доступа к этой странице</string>
     <string name="scr_any_msg_unknown_error">Непредвиденная ошибка</string>
 
+    <string name="scr_any_lbl_ok">OK</string>
+
+
 
 </resources>

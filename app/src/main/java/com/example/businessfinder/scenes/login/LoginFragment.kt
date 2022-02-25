@@ -40,8 +40,8 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
                 bindTextTwoWay(passwordFlow, tiePassword)
                 bind(emailErrorFlow) { tieLogin.error = it }
                 bind(passwordErrorFlow) { tiePassword.error = it }
-                bindAction(navigateRegistrationScreen) { Navigator.goToRegistrationScreen(this@LoginFragment) }
                 bindAction(navigateProfileScreen) { Navigator.goToProfileScreen(this@LoginFragment) }
+                bindAction(navigateRegistrationScreen) { Navigator.goToRegistrationScreen(this@LoginFragment) }
             }
         }
     }
