@@ -1,6 +1,5 @@
 package com.example.businessfinder.scenes.profile
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,8 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProfileFragment : BaseFragment<ProfileViewModel>(R.layout.fragment_profile) {
     override val viewModel: ProfileViewModel by viewModel()
     private val binding: FragmentProfileBinding by viewBinding(FragmentProfileBinding::bind)
-
-    private var pickerDialog: DatePickerDialog? = null
 
     private val requestCameraPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         viewModel.cameraPermissionRequestResult(it)

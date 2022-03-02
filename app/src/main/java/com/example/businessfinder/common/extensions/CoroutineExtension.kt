@@ -56,3 +56,5 @@ fun DocumentReference.snapshotAsFlow() = callbackFlow<DocumentSnapshot> {
         registration.remove()
     }
 }
+
+

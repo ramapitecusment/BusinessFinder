@@ -8,13 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
 import com.example.businessfinder.common.BaseViewModel
-import com.example.businessfinder.common.Constants
 import com.example.businessfinder.common.Constants.FILE_PREFIX
 import com.example.businessfinder.common.Constants.FILE_PROVIDER
 import com.example.businessfinder.common.Constants.FILE_SUFFIX
 import com.example.businessfinder.common.extensions.hasCameraPermission
 import com.example.businessfinder.common.extensions.hasReadStoragePermission
+import com.example.businessfinder.models.Result
 import com.example.businessfinder.models.User
+import com.example.businessfinder.services.StorageService
 import com.example.businessfinder.services.UserService
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
@@ -23,14 +24,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.net.URI
 
 class ProfileViewModel(
     private val userService: UserService,
+    private val storageService: StorageService
 ) : BaseViewModel() {
 
     private var photoUri: Uri? = null
@@ -78,8 +78,8 @@ class ProfileViewModel(
     }
 
     private fun onUserReceived(user: User?) {
+        if (user == null) return
         viewModelScope.launch {
-            if (user == null) return@launch
             binFlow.emit(user.bin)
             emailFlow.emit(user.email)
             companyNameFlow.emit(user.companyName)
@@ -109,23 +109,23 @@ class ProfileViewModel(
             if (appContext().hasReadStoragePermission()) launchChangePhotoDialogFlow.emit(Unit)
             else requestReadStoragePermissionFlow.emit(Unit)
         }
-
     }
 
     fun onSelectedPhotoResult(uri: Uri?) {
-        if (uri != null) {
-            viewModelScope.launch(Dispatchers.IO) {
-                val bitmap: Bitmap? = Glide.with(appContext()).asBitmap()
-                    .load(uri)
-                    .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                    .get()
-                ByteArrayOutputStream().use { stream ->
-                    bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                    val byteArrayStream = ByteArrayInputStream(stream.toByteArray())
-                        .readBytes()
-                        .toRequestBody(SERVER_ALLOWED_IMAGE_TYPE.toMediaTypeOrNull())
-                    updatePhotoFlow.call(byteArrayStream)
-                }
+        if (uri == null) return
+        viewModelScope.launch(Dispatchers.IO) {
+            val bitmap: Bitmap? = Glide.with(appContext()).asBitmap().load(uri)
+                .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
+            ByteArrayOutputStream().use { stream ->
+                bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                val byteArrayStream = ByteArrayInputStream(stream.toByteArray()).readBytes()
+                storageService.uploadUserPhoto(byteArrayStream).onEach {
+                    when (it) {
+                        is Result.Success -> onUploadImageSuccess(it.data)
+                        is Result.Failure -> onUploadImageFailure(it.msg)
+                        else -> {}
+                    }
+                }.launchIn(viewModelScope)
             }
         }
     }
@@ -147,5 +147,15 @@ class ProfileViewModel(
     private fun createFile(): File {
         val imagePath = appContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(FILE_PREFIX, FILE_SUFFIX, imagePath)
+    }
+
+    private fun onUploadImageSuccess(imagePath: String) {
+        viewModelScope.launch {
+            photoUrlFlow.emit(imagePath)
+        }
+    }
+
+    private fun onUploadImageFailure(error: Throwable) {
+
     }
 }
