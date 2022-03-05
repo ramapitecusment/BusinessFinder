@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         checkStartDestination()
         setupNavController()
+        binding.toolbar.setTitleTextColor(resources.getColor(R.color.colorAccent))
     }
 
 
