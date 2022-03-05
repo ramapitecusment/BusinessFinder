@@ -18,24 +18,33 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::bind)
-    private var navHostFragment: NavHostFragment? = null
-    private var navController: NavController? = null
+    private val navController: NavController
+        get() = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment?.navController
+        checkStartDestination()
+        setupNavController()
+    }
+
+
+    private fun checkStartDestination() {
+        val graph = navController.navInflater.inflate(R.navigation.nav_graph)
+        if (FirebaseAuth.getInstance().currentUser != null) graph.setStartDestination(R.id.profileFragment)
+        else graph.setStartDestination(R.id.loginFragment)
+        navController.graph = graph
+    }
+
+    private fun setupNavController() {
         val appBarConfiguration = AppBarConfiguration.Builder(setOf(R.id.profileFragment))
             .setOpenableLayout(binding.drawer)
             .build()
-        navController?.let { binding.toolbar.setupWithNavController(it, appBarConfiguration) }
-        navController?.addOnDestinationChangedListener { _, destination, _ ->
+        navController.let { binding.toolbar.setupWithNavController(it, appBarConfiguration) }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbar.isVisible = destination.id != R.id.loginFragment
         }
-        if (FirebaseAuth.getInstance().currentUser != null) goToProfileScreenClearingStack(navController!!)
-        else goToLoginScreen(navController!!)
     }
 
 }

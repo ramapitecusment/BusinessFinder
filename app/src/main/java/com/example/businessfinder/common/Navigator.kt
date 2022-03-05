@@ -31,24 +31,20 @@ object Navigator {
 
     fun goToProfileScreen(f: Fragment) = f.findNavController().navigate(R.id.profileFragment, null, options)
 
-    fun goToProfileScreenClearingStack(navController: NavController) = navigateClearingStack(navController, R.id.profileFragment)
+    fun goToProfileScreenClearingStack(navController: NavController) =
+        navigateClearingStack(navController, R.id.profileFragment)
 
-    private fun Fragment.navigateClearingStack(@IdRes resId: Int, clear: Boolean = true, args: Bundle? = null) {
-        val options = if (clear)
-            NavOptions.Builder()
-                .setPopUpTo(resId, true)
-                .setLaunchSingleTop(true)
-                .build()
-        else null
+    fun goToProfileScreenClearingStack(f: Fragment) = f.navigateClearingStack(R.id.profileFragment)
+
+    private fun Fragment.navigateClearingStack(@IdRes resId: Int, args: Bundle? = null) {
+        val options = NavOptions.Builder().setLaunchSingleTop(true).build()
+        findNavController().popBackStack()
         findNavController().navigate(resId, args, options)
     }
 
     private fun navigateClearingStack(navController: NavController, @IdRes resId: Int) {
-        val options =
-            NavOptions.Builder()
-                .setPopUpTo(resId, true)
-                .setLaunchSingleTop(true)
-                .build()
+        val options = NavOptions.Builder().setLaunchSingleTop(true).build()
+        navController.popBackStack()
         navController.navigate(resId, null, options)
     }
 
