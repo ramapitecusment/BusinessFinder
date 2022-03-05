@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 var viewModelModule = module {
     viewModel { LoginViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
     viewModel { RegistrationViewModel(get()) }
 
 }

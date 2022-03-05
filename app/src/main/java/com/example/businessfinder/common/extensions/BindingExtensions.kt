@@ -63,3 +63,11 @@ fun Fragment.bindImage(
     imageView: ImageView
 ) = stateFlow.onEach { imageView.glideImage(it) }
     .launchWhenStarted(viewLifecycleOwner)
+
+fun Fragment.bindFirebaseImage(
+    stateFlow: StateFlow<String>,
+    imageView: ImageView
+) = stateFlow.onEach {
+    if (it.isEmpty()) return@onEach
+    imageView.glideFirebaseImage(it)
+}.launchWhenStarted(viewLifecycleOwner)

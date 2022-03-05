@@ -3,6 +3,7 @@ package com.example.businessfinder.scenes.profile
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
@@ -19,10 +20,7 @@ import com.example.businessfinder.services.StorageService
 import com.example.businessfinder.services.UserService
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -58,11 +56,8 @@ class ProfileViewModel(
                     userData.emit(snaphot.toObject(User::class.java))
                 }
             }.launchIn(viewModelScope)
-        } else {
-            viewModelScope.launch {
-                navigateLoginScreenFlow.emit(Unit)
-            }
-        }
+        } else viewModelScope.launch { navigateLoginScreenFlow.emit(Unit) }
+
         userData.onEach(::onUserReceived).launchIn(viewModelScope)
     }
 
@@ -114,18 +109,20 @@ class ProfileViewModel(
     fun onSelectedPhotoResult(uri: Uri?) {
         if (uri == null) return
         viewModelScope.launch(Dispatchers.IO) {
-            val bitmap: Bitmap? = Glide.with(appContext()).asBitmap().load(uri)
-                .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get()
+            val bitmap: Bitmap? = Glide.with(appContext()).asBitmap()
+                .load(uri)
+                .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                .get()
             ByteArrayOutputStream().use { stream ->
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                 val byteArrayStream = ByteArrayInputStream(stream.toByteArray()).readBytes()
-                storageService.uploadUserPhoto(byteArrayStream).onEach {
+                storageService.uploadUserPhoto(byteArrayStream).collect {
                     when (it) {
                         is Result.Success -> onUploadImageSuccess(it.data)
                         is Result.Failure -> onUploadImageFailure(it.msg)
                         else -> {}
                     }
-                }.launchIn(viewModelScope)
+                }
             }
         }
     }
@@ -150,9 +147,17 @@ class ProfileViewModel(
     }
 
     private fun onUploadImageSuccess(imagePath: String) {
-        viewModelScope.launch {
-            photoUrlFlow.emit(imagePath)
-        }
+        val user = userData.value?.copy() ?: return
+        user.photoUrl = imagePath
+        userService.updateUserFlow(user).onEach {
+            viewModelScope.launch {
+                when (it) {
+                    is Result.Success -> {}
+                    is Result.Failure -> Log.d(TAG, it.msg.toString())
+                    else -> {}
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     private fun onUploadImageFailure(error: Throwable) {

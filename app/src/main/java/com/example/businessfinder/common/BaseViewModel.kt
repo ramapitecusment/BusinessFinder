@@ -11,6 +11,8 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
     val showToast = MutableSharedFlow<String>()
     val showAlertDialog = MutableSharedFlow<AlertDialogModel>()
 
+    val TAG = this.javaClass.name
+
     protected val ioScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     fun appContext() = this.getApplication<MainApplication>()

@@ -14,6 +14,8 @@ object FirebaseServices {
     val storage
         get() = FirebaseStorage.getInstance()
 
+    fun storageReference(path: String) = FirebaseStorage.getInstance().getReference(path)
+
     val usersCollection = Firebase.firestore.collection(KEY_USERS_COLLECTION)
 
     fun currentUserStorageRef(userUid: String) = storage.reference.child(userUid)

@@ -18,7 +18,6 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::bind)
-    private val userService: UserService by inject()
     private var navHostFragment: NavHostFragment? = null
     private var navController: NavController? = null
 
@@ -35,11 +34,8 @@ class MainActivity : AppCompatActivity() {
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbar.isVisible = destination.id != R.id.loginFragment
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
         if (FirebaseAuth.getInstance().currentUser != null) goToProfileScreenClearingStack(navController!!)
         else goToLoginScreen(navController!!)
     }
+
 }

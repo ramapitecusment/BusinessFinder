@@ -13,9 +13,9 @@ import com.example.businessfinder.common.extensions.bindAction
 import com.example.businessfinder.common.extensions.bindTextTwoWay
 import com.example.businessfinder.databinding.FragmentRegistrationBinding
 
-class RegistrationFragment : BaseFragment<RegistrationViewModel>(R.layout.fragment_registration) {
+class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>(R.layout.fragment_registration) {
     override val viewModel: RegistrationViewModel by viewModel()
-    private val binding: FragmentRegistrationBinding by viewBinding(FragmentRegistrationBinding::bind)
+    override val binding: FragmentRegistrationBinding by viewBinding(FragmentRegistrationBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

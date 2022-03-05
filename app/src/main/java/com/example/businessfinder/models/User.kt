@@ -6,7 +6,7 @@ data class User(
     val bin: String,
     val sphere: Int,
     val email: String,
-    val photoUrl: String
+    var photoUrl: String
 ) {
     constructor() : this("", "", "", -1, "", "")
 }

@@ -12,9 +12,9 @@ import com.example.businessfinder.common.extensions.bindAction
 import com.example.businessfinder.common.extensions.bindTextTwoWay
 import com.example.businessfinder.databinding.FragmentLoginBinding
 
-class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layout.fragment_login) {
     override val viewModel: LoginViewModel by viewModel()
-    private val binding: FragmentLoginBinding by viewBinding(FragmentLoginBinding::bind)
+    override val binding: FragmentLoginBinding by viewBinding(FragmentLoginBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
