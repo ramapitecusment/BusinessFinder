@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -43,7 +44,13 @@ class MainActivity : AppCompatActivity() {
             .build()
         navController.let { binding.toolbar.setupWithNavController(it, appBarConfiguration) }
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.toolbar.isVisible = destination.id != R.id.loginFragment
+            if (destination.id == R.id.loginFragment) {
+                binding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                binding.toolbar.isVisible = false
+            } else {
+                binding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                binding.toolbar.isVisible = true
+            }
         }
     }
 

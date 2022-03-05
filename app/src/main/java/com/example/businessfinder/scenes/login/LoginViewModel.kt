@@ -32,7 +32,7 @@ class LoginViewModel(
                 when (it) {
                     is Result.Success -> signInSuccess()
                     is Result.Failure -> signInFailure(it.msg)
-                    else -> {}
+                    is Result.Loading -> showLoading()
                 }
             }.launchIn(viewModelScope)
         } else {
@@ -48,9 +48,8 @@ class LoginViewModel(
     }
 
     private fun signInSuccess() {
-        viewModelScope.launch {
-            navigateProfileScreen.emit(Unit)
-        }
+        viewModelScope.launch { navigateProfileScreen.emit(Unit) }
+        hideLoading()
     }
 
     private fun signInFailure(e: Throwable) {
@@ -67,5 +66,7 @@ class LoginViewModel(
                 }
             }
         }
+        hideLoading()
     }
+
 }

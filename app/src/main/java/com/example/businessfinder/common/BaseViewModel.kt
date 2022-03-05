@@ -10,21 +10,22 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
     val showToast = MutableSharedFlow<String>()
     val showAlertDialog = MutableSharedFlow<AlertDialogModel>()
+    val showLoading = MutableSharedFlow<Boolean>()
 
     val TAG = this.javaClass.name
-
-    protected val ioScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     fun appContext() = this.getApplication<MainApplication>()
 
     protected fun showToast(message: String) {
-        viewModelScope.launch {
-            showToast.tryEmit(message)
-        }
+        viewModelScope.launch { showToast.emit(message) }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        ioScope.cancel()
+    protected fun showLoading() {
+        viewModelScope.launch { showLoading.emit(true) }
     }
+
+    protected fun hideLoading() {
+        viewModelScope.launch { showLoading.emit(false) }
+    }
+
 }

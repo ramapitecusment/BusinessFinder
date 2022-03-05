@@ -10,6 +10,7 @@ import com.example.businessfinder.common.Navigator
 import com.example.businessfinder.common.extensions.bind
 import com.example.businessfinder.common.extensions.bindAction
 import com.example.businessfinder.common.extensions.bindTextTwoWay
+import com.example.businessfinder.common.extensions.hideKeyboard
 import com.example.businessfinder.databinding.FragmentLoginBinding
 
 class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layout.fragment_login) {
@@ -26,9 +27,11 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layou
         with(binding) {
             signInButton.setOnClickListener {
                 viewModel.onSignInClicked()
+                hideKeyboard()
             }
             signUpButton.setOnClickListener {
                 viewModel.onSignUpClicked()
+                hideKeyboard()
             }
         }
     }
