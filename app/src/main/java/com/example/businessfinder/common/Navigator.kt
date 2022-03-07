@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.businessfinder.R
+import com.example.businessfinder.scenes.chat.ChatFragmentArgs
 
 object Navigator {
 
@@ -17,15 +18,12 @@ object Navigator {
         .setPopExitAnim(R.anim.animation_to_right)
     private val options = horizontalAnimationOptions.build()
 
-    fun goToMainScreen(f: Fragment) = f.navigateClearingStack(R.id.loginFragment)
-
     fun goToLoginScreen(f: Fragment) = f.navigateClearingStack(R.id.loginFragment)
-
-    fun goToLoginScreen(navController: NavController) = navigateClearingStack(navController, R.id.loginFragment)
 
     fun goToRegistrationScreen(f: Fragment) = f.findNavController().navigate(R.id.registrationFragment, null, options)
 
-    fun goToChatScreen(f: Fragment) = f.findNavController().navigate(R.id.chatFragment, null, options)
+    fun goToChatScreen(f: Fragment, userUID: String) =
+        f.findNavController().navigate(R.id.chatFragment, ChatFragmentArgs(userUID).toBundle(), options)
 
     fun goToChatChannelsScreen(f: Fragment) = f.findNavController().navigate(R.id.chatChannelsFragment, null, options)
 

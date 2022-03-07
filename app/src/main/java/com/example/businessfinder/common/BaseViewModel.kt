@@ -28,4 +28,16 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
         viewModelScope.launch { showLoading.emit(false) }
     }
 
+    protected fun loadingResult() {
+        showLoading()
+    }
+
+    protected fun failureResult(e: Throwable) {
+        hideLoading()
+        showToast(e.toString())
+    }
+
+    protected fun successResult() {
+        hideLoading()
+    }
 }

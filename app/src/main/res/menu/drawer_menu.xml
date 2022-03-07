@@ -18,7 +18,7 @@
         android:enabled="true"
         android:title="Предложения" />
     <item
-        android:id="@+id/chatFragment"
+        android:id="@+id/chatChannelsFragment"
         android:enabled="true"
         android:title="Чат" />
     <item

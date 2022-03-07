@@ -2,11 +2,9 @@ package com.example.businessfinder.common.extensions
 
 import androidx.lifecycle.*
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -39,7 +37,7 @@ fun Query.snapshotAsFlow() = callbackFlow<QuerySnapshot> {
     }
 }
 
-fun DocumentReference.snapshotAsFlow() = callbackFlow<DocumentSnapshot> {
+fun DocumentReference.snapshotAsFlow() = callbackFlow {
     val registration = addSnapshotListener { documentSnapshot, exception ->
         exception?.let {
             close(it)

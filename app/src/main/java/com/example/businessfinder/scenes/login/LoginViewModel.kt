@@ -32,7 +32,7 @@ class LoginViewModel(
                 when (it) {
                     is Result.Success -> signInSuccess()
                     is Result.Failure -> signInFailure(it.msg)
-                    is Result.Loading -> showLoading()
+                    is Result.Loading -> loadingResult()
                 }
             }.launchIn(viewModelScope)
         } else {
@@ -48,11 +48,12 @@ class LoginViewModel(
     }
 
     private fun signInSuccess() {
+        successResult()
         viewModelScope.launch { navigateProfileScreen.emit(Unit) }
-        hideLoading()
     }
 
     private fun signInFailure(e: Throwable) {
+        failureResult(e)
         when (e) {
             is FirebaseAuthInvalidUserException -> {
                 emailErrorFlow.value = "Данный пользователь не обнаружен"
@@ -66,7 +67,6 @@ class LoginViewModel(
                 }
             }
         }
-        hideLoading()
     }
 
 }

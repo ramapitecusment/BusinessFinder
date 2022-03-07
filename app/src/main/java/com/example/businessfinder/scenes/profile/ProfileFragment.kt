@@ -9,8 +9,7 @@ import com.example.businessfinder.common.BaseFragment
 import com.example.businessfinder.common.Constants.MIMETYPE_IMAGE
 import com.example.businessfinder.common.Navigator
 import com.example.businessfinder.common.extensions.bindAction
-import com.example.businessfinder.common.extensions.bindFirebaseImage
-import com.example.businessfinder.common.extensions.bindImage
+import com.example.businessfinder.common.extensions.bindProfileFirebaseImage
 import com.example.businessfinder.common.extensions.bindText
 import com.example.businessfinder.databinding.FragmentProfileBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,7 +64,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(R
                 bindText(binFlow, bin)
                 bindText(emailFlow, email)
                 bindText(companyNameFlow, companyName)
-                bindFirebaseImage(photoUrlFlow, userImageView)
+                bindProfileFirebaseImage(photoUrlFlow, userImageView)
                 bindAction(takePhotoFlow) { takePhoto.launch(it) }
                 bindAction(selectPhotoFlow) { selectPhoto.launch(MIMETYPE_IMAGE) }
                 bindAction(requestCameraPermissionFlow) { requestCameraPermission() }

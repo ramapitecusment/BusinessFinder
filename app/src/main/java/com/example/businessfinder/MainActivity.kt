@@ -14,6 +14,7 @@ import com.example.businessfinder.common.Navigator.goToLoginScreen
 import com.example.businessfinder.common.Navigator.goToProfileScreenClearingStack
 import com.example.businessfinder.databinding.ActivityMainBinding
 import com.example.businessfinder.services.UserService
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.android.ext.android.inject
 
@@ -43,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(setOf(R.id.profileFragment))
             .setOpenableLayout(binding.drawer)
             .build()
-        navController.let { binding.toolbar.setupWithNavController(it, appBarConfiguration) }
+        binding.navView.setupWithNavController(navController)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.loginFragment) {
                 binding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)

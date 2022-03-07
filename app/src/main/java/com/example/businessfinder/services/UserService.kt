@@ -17,7 +17,6 @@ class UserService {
         val data = FirebaseServices.auth.createUserWithEmailAndPassword(user.email, password).await()
         Log.d(TAG, "createUser success data: $data, user: ${FirebaseServices.auth.currentUser}")
         user.firebaseUID = FirebaseServices.auth.currentUser?.uid.toString()
-
         emit(Result.Success(Unit))
     }.flatMapLatest {
         insertUserFlow(user)
@@ -69,6 +68,8 @@ class UserService {
     }.flowOn(Dispatchers.IO)
 
     fun getUser(documentId: String) = FirebaseServices.currentUserDocument(documentId).snapshotAsFlow()
+
+    fun getAllUsers() = FirebaseServices.usersCollection.snapshotAsFlow()
 
     fun signOut() {
         FirebaseServices.auth.signOut()

@@ -13,7 +13,8 @@ import com.example.businessfinder.common.extensions.bindAction
 import com.example.businessfinder.common.extensions.bindTextTwoWay
 import com.example.businessfinder.databinding.FragmentRegistrationBinding
 
-class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>(R.layout.fragment_registration) {
+class RegistrationFragment :
+    BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>(R.layout.fragment_registration) {
     override val viewModel: RegistrationViewModel by viewModel()
     override val binding: FragmentRegistrationBinding by viewBinding(FragmentRegistrationBinding::bind)
 
@@ -41,7 +42,7 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
                 bindTextTwoWay(companyNameFlow, tieCompanyName)
                 bindTextTwoWay(phoneNumberFlow, tiePhoneNumber)
                 bindTextTwoWay(passwordRepeatFlow, tiePasswordRepeat)
-                bindAction(navigateProfileScreenFlow) { Navigator.goToProfileScreenClearingStack(this@RegistrationFragment.findNavController()) }
+                bindAction(navigateProfileScreenFlow) { Navigator.goToProfileScreenClearingStack(this@RegistrationFragment) }
             }
         }
     }

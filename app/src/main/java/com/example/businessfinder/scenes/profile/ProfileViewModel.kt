@@ -3,7 +3,6 @@ package com.example.businessfinder.scenes.profile
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
-import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
@@ -51,9 +50,11 @@ class ProfileViewModel(
 
     init {
         if (FirebaseAuth.getInstance().currentUser?.uid != null) {
+            loadingResult()
             userService.getUser(FirebaseAuth.getInstance().currentUser!!.uid).onEach { snaphot ->
                 viewModelScope.launch {
                     userData.emit(snaphot.toObject(User::class.java))
+                    successResult()
                 }
             }.launchIn(viewModelScope)
         } else viewModelScope.launch { navigateLoginScreenFlow.emit(Unit) }
@@ -74,12 +75,10 @@ class ProfileViewModel(
 
     private fun onUserReceived(user: User?) {
         if (user == null) return
-        viewModelScope.launch {
-            binFlow.emit(user.bin)
-            emailFlow.emit(user.email)
-            companyNameFlow.emit(user.companyName)
-            photoUrlFlow.emit(user.photoUrl)
-        }
+        binFlow.value = user.bin
+        emailFlow.value = user.email
+        companyNameFlow.value = user.companyName
+        photoUrlFlow.value = user.photoUrl
     }
 
     fun selectPhotoClicked() {
@@ -119,7 +118,8 @@ class ProfileViewModel(
                 storageService.uploadUserPhoto(byteArrayStream).collect {
                     when (it) {
                         is Result.Success -> onUploadImageSuccess(it.data)
-                        is Result.Failure -> onUploadImageFailure(it.msg)
+                        is Result.Failure -> failureResult(it.msg)
+                        is Result.Loading -> loadingResult()
                         else -> {}
                     }
                 }
@@ -150,17 +150,13 @@ class ProfileViewModel(
         val user = userData.value?.copy() ?: return
         user.photoUrl = imagePath
         userService.updateUserFlow(user).onEach {
-            viewModelScope.launch {
-                when (it) {
-                    is Result.Success -> {}
-                    is Result.Failure -> Log.d(TAG, it.msg.toString())
-                    else -> {}
-                }
+            when (it) {
+                is Result.Success -> successResult()
+                is Result.Failure -> failureResult(it.msg)
+                is Result.Loading -> loadingResult()
+                else -> {}
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun onUploadImageFailure(error: Throwable) {
-
-    }
 }

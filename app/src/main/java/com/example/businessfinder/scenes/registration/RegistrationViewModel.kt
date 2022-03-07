@@ -33,7 +33,8 @@ class RegistrationViewModel(
             ).onEach {
                 when (it) {
                     is Result.Success -> onSignUpSuccess()
-                    is Result.Failure -> onSignUpFailure(it.msg)
+                    is Result.Failure -> failureResult(it.msg)
+                    is Result.Loading -> loadingResult()
                     else -> {}
                 }
             }.launchIn(viewModelScope)
@@ -57,14 +58,9 @@ class RegistrationViewModel(
                 passwordFlow.value == passwordRepeatFlow.value
 
     private fun onSignUpSuccess() {
+        successResult()
         viewModelScope.launch {
             navigateProfileScreenFlow.emit(Unit)
-        }
-    }
-
-    private fun onSignUpFailure(msg: Throwable) {
-        viewModelScope.launch {
-            showToast.emit("Error: ${msg.message}")
         }
     }
 }

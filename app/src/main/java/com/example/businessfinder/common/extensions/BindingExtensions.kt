@@ -1,10 +1,18 @@
 package com.example.businessfinder.common.extensions
 
+import android.widget.Adapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.xwray.groupie.Group
+import com.xwray.groupie.GroupieAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.viewbinding.BindableItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -58,16 +66,27 @@ fun Fragment.bindTextTwoWay(stateFlow: MutableStateFlow<String>, editText: EditT
     }.launchWhenStarted(viewLifecycleOwner)
 }
 
-fun Fragment.bindImage(
+fun Fragment.bindProfileImage(
     stateFlow: StateFlow<String>,
     imageView: ImageView
-) = stateFlow.onEach { imageView.glideImage(it) }
+) = stateFlow.onEach { imageView.glideProfileImage(it) }
     .launchWhenStarted(viewLifecycleOwner)
 
-fun Fragment.bindFirebaseImage(
+fun Fragment.bindProfileFirebaseImage(
     stateFlow: StateFlow<String>,
     imageView: ImageView
 ) = stateFlow.onEach {
     if (it.isEmpty()) return@onEach
-    imageView.glideFirebaseImage(it)
+    imageView.glideProfileFirebaseImage(it)
+}.launchWhenStarted(viewLifecycleOwner)
+
+fun <T, TViewHolder : RecyclerView.ViewHolder?> Fragment.bindRecyclerViewAdapter(
+    stateFlow: StateFlow<List<T>>,
+    adapter: ListAdapter<T, TViewHolder>,
+    block: (() -> Unit)? = null
+) = stateFlow.onEach {
+    if (it.isNotEmpty()) {
+        adapter.submitList(it)
+        if (block != null) block()
+    }
 }.launchWhenStarted(viewLifecycleOwner)
