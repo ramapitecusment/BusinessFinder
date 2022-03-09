@@ -1,4 +1,4 @@
-package com.example.businessfinder.scenes.chat.chatchannels
+package com.example.businessfinder.scenes.chatchannels
 
 import androidx.lifecycle.viewModelScope
 import com.example.businessfinder.common.BaseViewModel

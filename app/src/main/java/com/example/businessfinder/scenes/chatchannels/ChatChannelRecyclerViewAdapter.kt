@@ -1,4 +1,4 @@
-package com.example.businessfinder.scenes.chat.chatchannels
+package com.example.businessfinder.scenes.chatchannels
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

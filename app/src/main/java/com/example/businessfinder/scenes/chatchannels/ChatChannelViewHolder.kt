@@ -1,4 +1,4 @@
-package com.example.businessfinder.scenes.chat.chatchannels
+package com.example.businessfinder.scenes.chatchannels
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,15 +12,12 @@ class ChatChannelViewHolder(
     private val onClick: (userUID: String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    init {
-        binding.chatChannelItem.setOnClickListener { onClick }
-    }
-
     fun bind(user: User) {
         with(binding) {
             username.text = user.companyName
             userEmail.text = user.email
             userImageView.glideProfileFirebaseImage(user.photoUrl)
+            chatChannelItem.setOnClickListener { onClick.invoke(user.firebaseUID) }
         }
     }
 

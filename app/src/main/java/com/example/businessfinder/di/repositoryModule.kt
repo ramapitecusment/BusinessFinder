@@ -1,5 +1,6 @@
 package com.example.businessfinder.di
 
+import com.example.businessfinder.services.ChatService
 import com.example.businessfinder.services.StorageService
 import com.example.businessfinder.services.UserService
 import com.google.firebase.auth.FirebaseAuth
@@ -10,8 +11,8 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single { UserService() }
+    single { ChatService() }
     single { StorageService() }
     single { FirebaseAuth.getInstance() }
     single { Firebase.firestore }
-
 }

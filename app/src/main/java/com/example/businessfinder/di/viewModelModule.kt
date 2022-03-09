@@ -1,6 +1,7 @@
 package com.example.businessfinder.di
 
-import com.example.businessfinder.scenes.chat.chatchannels.ChatChannelsViewModel
+import com.example.businessfinder.scenes.chat.ChatViewModel
+import com.example.businessfinder.scenes.chatchannels.ChatChannelsViewModel
 import com.example.businessfinder.scenes.login.LoginViewModel
 import com.example.businessfinder.scenes.profile.ProfileViewModel
 import com.example.businessfinder.scenes.registration.RegistrationViewModel
@@ -12,5 +13,5 @@ var viewModelModule = module {
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { RegistrationViewModel(get()) }
     viewModel { ChatChannelsViewModel(get()) }
-
+    viewModel { ChatViewModel(get(), get()) }
 }

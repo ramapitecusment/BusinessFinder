@@ -51,11 +51,9 @@ class ProfileViewModel(
     init {
         if (FirebaseAuth.getInstance().currentUser?.uid != null) {
             loadingResult()
-            userService.getUser(FirebaseAuth.getInstance().currentUser!!.uid).onEach { snaphot ->
-                viewModelScope.launch {
-                    userData.emit(snaphot.toObject(User::class.java))
-                    successResult()
-                }
+            userService.getUser(FirebaseAuth.getInstance().currentUser!!.uid).onEach { snapshot ->
+                userData.value = snapshot.toObject(User::class.java)
+                successResult()
             }.launchIn(viewModelScope)
         } else viewModelScope.launch { navigateLoginScreenFlow.emit(Unit) }
 

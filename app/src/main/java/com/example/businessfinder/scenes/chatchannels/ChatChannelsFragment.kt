@@ -1,4 +1,4 @@
-package com.example.businessfinder.scenes.chat.chatchannels
+package com.example.businessfinder.scenes.chatchannels
 
 import android.os.Bundle
 import android.view.View
@@ -15,7 +15,7 @@ class ChatChannelsFragment :
     override val viewModel: ChatChannelsViewModel by viewModel()
     override val binding: FragmentChatChannelsBinding by viewBinding(FragmentChatChannelsBinding::bind)
 
-    private val onChatChannelClick: (userUID: String) -> Unit = { Navigator.goToChatScreen(this, it) }
+    private val onChatChannelClick: (otherUserUID: String) -> Unit = { Navigator.goToChatScreen(this, it) }
     private val adapter = ChatChannelRecyclerViewAdapter(onChatChannelClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -22,8 +22,8 @@ object Navigator {
 
     fun goToRegistrationScreen(f: Fragment) = f.findNavController().navigate(R.id.registrationFragment, null, options)
 
-    fun goToChatScreen(f: Fragment, userUID: String) =
-        f.findNavController().navigate(R.id.chatFragment, ChatFragmentArgs(userUID).toBundle(), options)
+    fun goToChatScreen(f: Fragment, otherUserUID: String) =
+        f.findNavController().navigate(R.id.chatFragment, ChatFragmentArgs(otherUserUID).toBundle(), options)
 
     fun goToChatChannelsScreen(f: Fragment) = f.findNavController().navigate(R.id.chatChannelsFragment, null, options)
 

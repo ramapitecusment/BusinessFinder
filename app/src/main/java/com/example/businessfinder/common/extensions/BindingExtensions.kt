@@ -1,6 +1,5 @@
 package com.example.businessfinder.common.extensions
 
-import android.widget.Adapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,11 +7,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
-import com.xwray.groupie.Group
-import com.xwray.groupie.GroupieAdapter
-import com.xwray.groupie.Section
-import com.xwray.groupie.viewbinding.BindableItem
+import com.example.businessfinder.MainActivity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,6 +17,10 @@ fun Fragment.bindText(stateFlow: StateFlow<String>, textView: TextView) =
     stateFlow.onEach {
         textView.text = it
     }.launchWhenStarted(viewLifecycleOwner)
+
+fun Fragment.bindTitle(stateFlow: StateFlow<String>) = stateFlow.onEach {
+    (requireActivity() as MainActivity).updateToolbar(it)
+}.launchWhenStarted(viewLifecycleOwner)
 
 inline fun <T> Fragment.bind(stateFlow: StateFlow<T>, crossinline block: (T) -> Unit) =
     stateFlow.onEach { value ->

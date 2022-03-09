@@ -15,14 +15,15 @@
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/chatChannelsFragment"
-        android:name="com.example.businessfinder.scenes.chat.chatchannels.ChatChannelsFragment"
+        android:name="com.example.businessfinder.scenes.chatchannels.ChatChannelsFragment"
+        android:label="Сообщения"
         tools:layout="@layout/fragment_chat_channels" />
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.businessfinder.scenes.chat.ChatFragment"
-        tools:layout="@layout/fragment_chat" >
+        tools:layout="@layout/fragment_chat">
         <argument
-            android:name="userUID"
+            android:name="otherUserUID"
             app:argType="string" />
     </fragment>
     <fragment

@@ -71,8 +71,7 @@ class UserService {
 
     fun getAllUsers() = FirebaseServices.usersCollection.snapshotAsFlow()
 
-    fun signOut() {
-        FirebaseServices.auth.signOut()
-    }
+    fun signOut() = FirebaseServices.auth.signOut()
+
 
 }
