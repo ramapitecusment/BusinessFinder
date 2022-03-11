@@ -28,7 +28,7 @@ class RegistrationViewModel(
     fun onSignUpClicked() {
         if (checkDataValid()) {
             userService.createUserFlow(
-                User("", companyNameFlow.value, binFlow.value, sphereIdFlow.value.toInt(), emailFlow.value, ""),
+                User("", companyNameFlow.value, binFlow.value, sphereIdFlow.value, emailFlow.value, ""),
                 passwordFlow.value
             ).onEach {
                 when (it) {

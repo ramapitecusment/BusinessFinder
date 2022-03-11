@@ -31,5 +31,44 @@
         android:name="com.example.businessfinder.scenes.profile.ProfileFragment"
         android:label="Личный кабинет"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.example.businessfinder.scenes.category.CategoriesFragment"
+        android:label="Категории"
+        tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/sphereFragment"
+        android:name="com.example.businessfinder.scenes.sphere.SphereFragment"
+        android:label=""
+        tools:layout="@layout/fragment_spheres">
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/analysisFragment"
+        android:name="com.example.businessfinder.scenes.analysis.AnalysisFragment"
+        android:label=""
+        tools:layout="@layout/fragment_analysis" />
+    <fragment
+        android:id="@+id/requestFragment"
+        android:name="com.example.businessfinder.scenes.request.RequestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_request" />
+    <fragment
+        android:id="@+id/offersFragment"
+        android:name="com.example.businessfinder.scenes.offers.OffersFragment"
+        android:label=""
+        tools:layout="@layout/fragment_offers">
+        <argument
+            android:name="searchOffer"
+            app:argType="com.example.businessfinder.models.SearchOffer"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
 
 </navigation>

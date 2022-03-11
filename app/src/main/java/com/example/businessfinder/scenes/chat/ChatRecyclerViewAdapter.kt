@@ -4,13 +4,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.businessfinder.models.Message
+import com.google.firebase.auth.FirebaseAuth
 
-class ChatRecyclerViewAdapter : ListAdapter<Message, ChatViewHolder>(ChatCallback()) {
+class ChatRecyclerViewAdapter(private val currentUser: String) : ListAdapter<Message, ChatViewHolder>(ChatCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder = ChatViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), currentUser)
     }
 }
 

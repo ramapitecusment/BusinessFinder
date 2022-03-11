@@ -75,7 +75,6 @@ fun Fragment.bindProfileFirebaseImage(
     stateFlow: StateFlow<String>,
     imageView: ImageView
 ) = stateFlow.onEach {
-    if (it.isEmpty()) return@onEach
     imageView.glideProfileFirebaseImage(it)
 }.launchWhenStarted(viewLifecycleOwner)
 

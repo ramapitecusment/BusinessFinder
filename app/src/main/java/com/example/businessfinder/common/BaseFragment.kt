@@ -14,6 +14,7 @@ abstract class BaseFragment<TViewModel : BaseViewModel, VB : ViewBinding>(@Layou
     protected abstract val viewModel: TViewModel
     protected abstract val binding: VB
     private var progressDialog: AlertDialog? = null
+    protected val TAG = this::class.java.simpleName
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

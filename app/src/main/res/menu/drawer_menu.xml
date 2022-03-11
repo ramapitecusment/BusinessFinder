@@ -6,7 +6,7 @@
         android:enabled="true"
         android:title="Личный кабинет" />
     <item
-        android:id="@+id/categoryFragment"
+        android:id="@+id/categoriesFragment"
         android:enabled="true"
         android:title="Категории" />
     <item
@@ -14,7 +14,7 @@
         android:enabled="true"
         android:title="Заявки" />
     <item
-        android:id="@+id/offerFragment"
+        android:id="@+id/offersFragment"
         android:enabled="true"
         android:title="Предложения" />
     <item

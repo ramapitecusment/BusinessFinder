@@ -1,8 +1,10 @@
 package com.example.businessfinder.services
 
+import com.example.businessfinder.common.Constants.KEY_CATEGORIES
 import com.example.businessfinder.common.Constants.KEY_CHAT_CHANNELS
 import com.example.businessfinder.common.Constants.KEY_ENGAGED_CHAT_CHANNELS
 import com.example.businessfinder.common.Constants.KEY_MESSAGES
+import com.example.businessfinder.common.Constants.KEY_SPHERES
 import com.example.businessfinder.common.Constants.KEY_USERS_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -22,6 +24,12 @@ object FirebaseServices {
 
     val chatChannelsCollection
         get() = Firebase.firestore.collection(KEY_CHAT_CHANNELS)
+
+    val categoriesCollection
+        get() = Firebase.firestore.collection(KEY_CATEGORIES)
+
+    val spheresCollection
+        get() = Firebase.firestore.collection(KEY_SPHERES)
 
     fun storageReference(path: String) = FirebaseStorage.getInstance().getReference(path)
 

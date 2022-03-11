@@ -28,7 +28,6 @@ class StorageService {
         emit(Result.Success(data.path))
     }.catch {
         Log.e(TAG, "uploadUserPhoto failure", it.fillInStackTrace())
-        Result.Failure(it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 

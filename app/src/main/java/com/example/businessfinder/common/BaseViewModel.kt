@@ -1,5 +1,6 @@
 package com.example.businessfinder.common
 
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.businessfinder.MainApplication
@@ -34,7 +35,7 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
 
     protected fun failureResult(e: Throwable) {
         hideLoading()
-        showToast(e.toString())
+        Log.d(TAG, e.toString())
     }
 
     protected fun successResult() {

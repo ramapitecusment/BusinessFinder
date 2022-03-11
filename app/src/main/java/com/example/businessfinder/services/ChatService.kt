@@ -14,7 +14,7 @@ class ChatService {
 
     fun getOrCreateChatChannel(otherUserId: String, onComplete: (channelId: String) -> Unit) {
         FirebaseServices.currentUserDocument(FirebaseServices.auth.uid!!)
-            .collection(Constants.KEY_ENGAGED_CHAT_CHANNELS)
+            .collection(KEY_ENGAGED_CHAT_CHANNELS)
             .document(otherUserId).get().addOnSuccessListener {
                 if (it.exists()) onComplete(it["channelId"] as String)
                 else {

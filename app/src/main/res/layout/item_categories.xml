@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_item_margin"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
+        android:id="@+id/categoryPhoto"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
@@ -15,6 +16,7 @@
         tools:src="@drawable/demo_category" />
 
     <TextView
+        android:id="@+id/categoryText"
         style="@style/Theme.BusinessFinder.TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

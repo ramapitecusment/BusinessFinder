@@ -4,9 +4,9 @@ data class User(
     var firebaseUID: String,
     val companyName: String,
     val bin: String,
-    val sphere: Int,
+    val sphere: String,
     val email: String,
     var photoUrl: String
 ) {
-    constructor() : this("", "", "", -1, "", "")
+    constructor() : this("", "", "", "", "", "")
 }

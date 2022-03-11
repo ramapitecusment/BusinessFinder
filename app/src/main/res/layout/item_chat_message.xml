@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/default_margin_horizontal"
+    android:layout_marginVertical="8dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/chatLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin_horizontal"
+        android:layout_marginVertical="7dp"
+        android:background="@drawable/background_oval_white"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/messageText"
+            style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxWidth="220dp"
+            android:minWidth="120dp"
+            android:paddingEnd="35dp"
+            android:textSize="16sp"
+            tools:ignore="RtlSymmetry"
+            tools:text="sdf sdf s s s s s   s ss s s" />
+
+        <TextView
+            android:id="@+id/messageTime"
+            style="@style/Theme.BusinessFinder.DescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="8dp"
+            android:textSize="12sp"
+            tools:text="12:50" />
+
+    </FrameLayout>
+</FrameLayout>

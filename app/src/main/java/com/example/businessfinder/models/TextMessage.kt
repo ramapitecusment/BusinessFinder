@@ -1,12 +1,10 @@
 package com.example.businessfinder.models
 
-import java.util.*
-
 data class TextMessage(
     val text: String,
-    override val time: Date,
     override val senderId: String,
+    override val time: Long = System.currentTimeMillis(),
     override val type: String = MessageType.TEXT
 ) : Message {
-    constructor() : this("", Date(), "", MessageType.TEXT)
+    constructor() : this("", "", System.currentTimeMillis(), MessageType.TEXT)
 }

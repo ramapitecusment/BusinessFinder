@@ -22,7 +22,6 @@ class UserService {
         insertUserFlow(user)
     }.catch {
         Log.e(TAG, "createUser failure", it.fillInStackTrace())
-        Result.Failure(it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 
@@ -33,7 +32,6 @@ class UserService {
         emit(Result.Success(Unit))
     }.catch {
         Log.e(TAG, "signInUser failure", it.fillInStackTrace())
-        Result.Failure(it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 
@@ -48,7 +46,6 @@ class UserService {
         }
     }.catch {
         Log.e(TAG, "insertUser failure", it.fillInStackTrace())
-        Result.Failure(it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 
@@ -63,7 +60,6 @@ class UserService {
         }
     }.catch {
         Log.e(TAG, "updateUser failure", it.fillInStackTrace())
-        Result.Failure(it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 

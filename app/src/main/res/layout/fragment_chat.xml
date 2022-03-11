@@ -3,14 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#EEE"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="5"
         tools:listitem="@layout/item_chat_message" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingHorizontal="10dp">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/messageToSend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_oval_white"
+                android:hint="Сообщение"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:padding="8dp"
+                android:paddingEnd="35dp"
+                tools:text="Сообщение" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sendButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardElevation="0dp"
+                app:shapeAppearanceOverlay="@style/roundedCardView">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_send"
+                    tools:ignore="ContentDescription" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </FrameLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sendImageButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="8dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="#FFF"
+            app:shapeAppearanceOverlay="@style/roundedCardView">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                android:src="@drawable/ic_baseline_image_24"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </LinearLayout>

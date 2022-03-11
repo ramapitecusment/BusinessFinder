@@ -89,7 +89,6 @@
         <item name="cornerSize">15dp</item>
     </style>
 
-
     <style name="Theme.BusinessFinder.Button.Shape">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -103,6 +102,7 @@
     <!--  RoundedCardView  -->
     <style name="roundedCardView">
         <item name="cornerSize">50%</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 
     <!--  BottomSheetDialog  -->
