@@ -18,11 +18,8 @@ class SphereViewModel(
     val title = MutableStateFlow("")
     val spheres = MutableStateFlow<List<Sphere>>(emptyList())
 
-    init {
-        spheres.value = emptyList()
-    }
-
     fun start(categoryId: String, categoryName: String) {
+        if (this.categoryId != null) return
         this.categoryId = categoryId
         title.value = categoryName
         getSpheres()

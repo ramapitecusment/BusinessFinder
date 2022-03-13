@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.businessfinder.models.OfferListItem
 
 class OffersRecyclerViewAdapter(
-    private val onClick: (offerId: String) -> Unit
+    private val onClick: (offerItem: OfferListItem) -> Unit
 ) : ListAdapter<OfferListItem, OffersViewHolder>(OffersCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = OffersViewHolder.from(parent, onClick)
@@ -18,7 +18,7 @@ class OffersRecyclerViewAdapter(
 
 class OffersCallback : DiffUtil.ItemCallback<OfferListItem>() {
     override fun areItemsTheSame(oldItem: OfferListItem, newItem: OfferListItem): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.offer.id == newItem.offer.id
     }
 
     override fun areContentsTheSame(oldItem: OfferListItem, newItem: OfferListItem): Boolean {

@@ -11,6 +11,7 @@ object Constants {
     const val KEY_CHAT_CHANNELS = "chatChannels"
     const val KEY_ENGAGED_CHAT_CHANNELS = "engagedChatChannels"
 
+    const val KEY_OFFERS = "offers"
     const val KEY_SPHERES = "spheres"
     const val KEY_CATEGORIES = "categories"
 

@@ -6,8 +6,10 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.businessfinder.R
 import com.example.businessfinder.common.BaseFragment
+import com.example.businessfinder.common.Navigator
 import com.example.businessfinder.common.extensions.bindRecyclerViewAdapter
 import com.example.businessfinder.databinding.FragmentOffersBinding
+import com.example.businessfinder.models.OfferListItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OffersFragment : BaseFragment<OffersViewModel, FragmentOffersBinding>(R.layout.fragment_offers) {
@@ -16,7 +18,7 @@ class OffersFragment : BaseFragment<OffersViewModel, FragmentOffersBinding>(R.la
     override val viewModel: OffersViewModel by viewModel()
     override val binding: FragmentOffersBinding by viewBinding(FragmentOffersBinding::bind)
 
-    private val onClick: (offerId: String) -> Unit = { }
+    private val onClick: (offerItem: OfferListItem) -> Unit = { Navigator.goToOfferScreen(this, it) }
     private val adapter = OffersRecyclerViewAdapter(onClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

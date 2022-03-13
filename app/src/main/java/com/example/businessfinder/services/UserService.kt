@@ -65,6 +65,16 @@ class UserService {
 
     fun getUser(documentId: String) = FirebaseServices.currentUserDocument(documentId).snapshotAsFlow()
 
+    fun getUserFlow(documentId: String): Flow<Result<User>> = flow {
+        emit(Result.Loading)
+        val data = FirebaseServices.currentUserDocument(documentId).get().await()
+        Log.d(TAG, "getUserFlow success: $data")
+        emit(Result.Success(data.toObject(User::class.java)!!))
+    }.catch {
+        Log.e(TAG, "getUserFlow failure", it.fillInStackTrace())
+        emit(Result.Failure(it))
+    }
+
     fun getAllUsers() = FirebaseServices.usersCollection.snapshotAsFlow()
 
     fun signOut() = FirebaseServices.auth.signOut()

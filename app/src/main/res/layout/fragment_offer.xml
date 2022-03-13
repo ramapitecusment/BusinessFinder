@@ -1,7 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/default_margin_horizontal">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/companyPhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/logo_profile" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/companyName"
+                    style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="Наименование компании" />
+
+                <TextView
+                    android:id="@+id/companySphere"
+                    style="@style/Theme.BusinessFinder.TitleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    tools:text="Сфера компании" />
+
+                <TextView
+                    android:id="@+id/price"
+                    style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:fontFamily="@font/sf_pro"
+                    android:textColor="@color/colorAccent"
+                    tools:text="15000" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/alt_text_background"
+            android:padding="7dp"
+            android:textSize="15sp"
+            tools:text="ВЫЩлмывзащшмлхмушком-цукш оцу-кпшцуокп9уцшом ц-укш9омц умшьцумкшцу мтцу-амкту м" />
+
+        <TextView
+            android:id="@+id/deadline"
+            style="@style/Theme.BusinessFinder.TitleText.TitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/sf_pro"
+            android:textColor="@color/colorAccent"
+            tools:text="Срок: 10 дней" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/acceptOfferButton"
+                style="@style/Theme.BusinessFinder.Button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:text="Принять" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/declineOfferButton"
+                style="@style/Theme.BusinessFinder.Button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/grapefruit"
+                android:paddingVertical="5dp"
+                android:text="Отклонить" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

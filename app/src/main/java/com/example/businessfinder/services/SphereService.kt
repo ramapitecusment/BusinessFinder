@@ -18,7 +18,7 @@ class SphereService {
         val data = FirebaseServices.spheresCollection.whereEqualTo("categoryId", categoryId).get().await()
         emit(Result.Success(data.toObjects(Sphere::class.java)))
     }.catch {
-        Log.e(TAG, "insertUser failure", it.fillInStackTrace())
+        Log.e(TAG, "getSpheresByCategoryId failure", it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 
@@ -27,7 +27,15 @@ class SphereService {
         val data = FirebaseServices.spheresCollection.get().await()
         emit(Result.Success(data.toObjects(Sphere::class.java)))
     }.catch {
-        Log.e(TAG, "insertUser failure", it.fillInStackTrace())
+        Log.e(TAG, "getAllSpheres failure", it.fillInStackTrace())
+        emit(Result.Failure(it))
+    }.flowOn(Dispatchers.IO)
+
+    fun getSphereById(sphereId: String) = flow<Result<Sphere>> {
+        val data = FirebaseServices.spheresCollection.document(sphereId).get().await()
+        emit(Result.Success(data.toObject(Sphere::class.java)!!))
+    }.catch {
+        Log.e(TAG, "getAllSpheres failure", it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 

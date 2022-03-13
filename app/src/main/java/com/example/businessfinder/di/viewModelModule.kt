@@ -4,6 +4,7 @@ import com.example.businessfinder.scenes.category.CategoriesViewModel
 import com.example.businessfinder.scenes.chat.ChatViewModel
 import com.example.businessfinder.scenes.chatchannels.ChatChannelsViewModel
 import com.example.businessfinder.scenes.login.LoginViewModel
+import com.example.businessfinder.scenes.offer.OfferViewModel
 import com.example.businessfinder.scenes.offers.OffersViewModel
 import com.example.businessfinder.scenes.profile.ProfileViewModel
 import com.example.businessfinder.scenes.registration.RegistrationViewModel
@@ -13,6 +14,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 var viewModelModule = module {
+    viewModel { OfferViewModel() }
     viewModel { LoginViewModel(get()) }
     viewModel { SphereViewModel(get()) }
     viewModel { RequestViewModel(get()) }

@@ -4,6 +4,7 @@ import com.example.businessfinder.common.Constants.KEY_CATEGORIES
 import com.example.businessfinder.common.Constants.KEY_CHAT_CHANNELS
 import com.example.businessfinder.common.Constants.KEY_ENGAGED_CHAT_CHANNELS
 import com.example.businessfinder.common.Constants.KEY_MESSAGES
+import com.example.businessfinder.common.Constants.KEY_OFFERS
 import com.example.businessfinder.common.Constants.KEY_SPHERES
 import com.example.businessfinder.common.Constants.KEY_USERS_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
@@ -30,6 +31,9 @@ object FirebaseServices {
 
     val spheresCollection
         get() = Firebase.firestore.collection(KEY_SPHERES)
+
+    val offersCollection
+        get() = Firebase.firestore.collection(KEY_OFFERS)
 
     fun storageReference(path: String) = FirebaseStorage.getInstance().getReference(path)
 

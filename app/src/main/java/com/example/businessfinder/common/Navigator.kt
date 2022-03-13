@@ -8,8 +8,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.businessfinder.R
 import com.example.businessfinder.models.Category
+import com.example.businessfinder.models.OfferListItem
 import com.example.businessfinder.models.SearchOffer
 import com.example.businessfinder.scenes.chat.ChatFragmentArgs
+import com.example.businessfinder.scenes.offer.OfferFragmentArgs
 import com.example.businessfinder.scenes.offers.OffersFragmentArgs
 import com.example.businessfinder.scenes.sphere.SphereFragmentArgs
 
@@ -44,6 +46,9 @@ object Navigator {
 
     fun goToOffersScreen(f: Fragment, searchOffer: SearchOffer) =
         f.findNavController().navigate(R.id.offersFragment, OffersFragmentArgs(searchOffer).toBundle(), options)
+
+    fun goToOfferScreen(f: Fragment, offerItem: OfferListItem) =
+        f.findNavController().navigate(R.id.offerFragment, OfferFragmentArgs(offerItem).toBundle(), options)
 
     private fun Fragment.navigateClearingStack(@IdRes resId: Int, args: Bundle? = null) {
         val options = NavOptions.Builder().setLaunchSingleTop(true).build()

@@ -9,12 +9,12 @@ import com.example.businessfinder.models.OfferListItem
 
 class OffersViewHolder(
     private val binding: ItemOfferBinding,
-    private val onClick: (offerId: String) -> Unit
+    private val onClick: (offerItem: OfferListItem) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(offer: OfferListItem) {
         with(binding) {
-            offerCard.setOnClickListener { onClick(offer.id) }
+            offerCard.setOnClickListener { onClick(offer) }
             title.text = offer.sphere.name
             companyName.text = offer.user.companyName
             description.text = offer.offer.description
@@ -23,7 +23,7 @@ class OffersViewHolder(
     }
 
     companion object {
-        fun from(parent: ViewGroup, onClick: (offerId: String) -> Unit): OffersViewHolder = OffersViewHolder(
+        fun from(parent: ViewGroup, onClick: (offerItem: OfferListItem) -> Unit): OffersViewHolder = OffersViewHolder(
             ItemOfferBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onClick
         )

@@ -1,5 +1,9 @@
 package com.example.businessfinder.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     var firebaseUID: String,
     val companyName: String,
@@ -7,6 +11,6 @@ data class User(
     val sphere: String,
     val email: String,
     var photoUrl: String
-) {
+) : Parcelable {
     constructor() : this("", "", "", "", "", "")
 }
