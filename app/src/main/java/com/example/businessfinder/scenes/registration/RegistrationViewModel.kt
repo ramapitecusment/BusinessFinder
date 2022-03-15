@@ -58,12 +58,7 @@ class RegistrationViewModel(
                     else -> {}
                 }
             }.launchIn(viewModelScope)
-        } else {
-            viewModelScope.launch {
-                showToast.emit("Проверьте все ли поля заполнены корректно")
-            }
-        }
-
+        } else viewModelScope.launch { showToast.emit("Проверьте все ли поля заполнены корректно") }
     }
 
     private fun checkDataValid(): Boolean =
@@ -79,8 +74,6 @@ class RegistrationViewModel(
 
     private fun onSignUpSuccess() {
         successResult()
-        viewModelScope.launch {
-            navigateProfileScreenFlow.emit(Unit)
-        }
+        viewModelScope.launch { navigateProfileScreenFlow.emit(Unit) }
     }
 }

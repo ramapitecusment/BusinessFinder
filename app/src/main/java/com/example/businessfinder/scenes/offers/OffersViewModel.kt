@@ -9,7 +9,6 @@ import com.example.businessfinder.services.UserService
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.joinAll
-import kotlin.coroutines.cancellation.CancellationException
 
 class OffersViewModel(
     private val userService: UserService,
