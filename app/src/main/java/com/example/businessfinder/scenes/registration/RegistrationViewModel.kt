@@ -49,10 +49,8 @@ class RegistrationViewModel(
     fun onSignUpClicked() {
         if (checkDataValid()) {
             val sphereId: String = spheres.value.firstOrNull { sphereNameFlow.value == it.name }?.id ?: return
-            userService.createUserFlow(
-                User("", companyNameFlow.value, binFlow.value, sphereId, emailFlow.value, ""),
-                passwordFlow.value
-            ).onEach {
+            val user = User("", companyNameFlow.value, binFlow.value, sphereId, emailFlow.value, "")
+            userService.createUserFlow(user, passwordFlow.value).onEach {
                 when (it) {
                     is Result.Success -> onSignUpSuccess()
                     is Result.Failure -> failureResult(it.msg)
