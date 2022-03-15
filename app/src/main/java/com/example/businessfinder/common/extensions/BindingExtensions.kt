@@ -1,13 +1,12 @@
 package com.example.businessfinder.common.extensions
 
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.businessfinder.MainActivity
+import com.example.businessfinder.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,6 +19,11 @@ fun Fragment.bindText(stateFlow: StateFlow<String>, textView: TextView) =
 
 fun Fragment.bindTitle(stateFlow: StateFlow<String>) = stateFlow.onEach {
     (requireActivity() as MainActivity).updateToolbar(it)
+}.launchWhenStarted(viewLifecycleOwner)
+
+fun Fragment.bindSpinner(stateFlow: StateFlow<List<String>>, spinner: AutoCompleteTextView) = stateFlow.onEach {
+    val adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, it)
+    (spinner as? AutoCompleteTextView)?.setAdapter(adapter)
 }.launchWhenStarted(viewLifecycleOwner)
 
 inline fun <T> Fragment.bind(stateFlow: StateFlow<T>, crossinline block: (T) -> Unit) =

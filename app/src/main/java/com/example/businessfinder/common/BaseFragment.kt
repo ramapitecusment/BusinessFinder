@@ -33,6 +33,10 @@ abstract class BaseFragment<TViewModel : BaseViewModel, VB : ViewBinding>(@Layou
         }
     }
 
+    protected fun showToast(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         progressDialog?.dismiss()

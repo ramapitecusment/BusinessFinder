@@ -3,32 +3,54 @@ package com.example.businessfinder.scenes.registration
 import androidx.lifecycle.viewModelScope
 import com.example.businessfinder.common.BaseViewModel
 import com.example.businessfinder.models.Result
+import com.example.businessfinder.models.Sphere
 import com.example.businessfinder.models.User
+import com.example.businessfinder.services.SphereService
 import com.example.businessfinder.services.UserService
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel(
+    sphereService: SphereService,
     private val userService: UserService
 ) : BaseViewModel() {
 
     val binFlow = MutableStateFlow("")
     val emailFlow = MutableStateFlow("")
-    val sphereIdFlow = MutableStateFlow("")
+    val sphereNameFlow = MutableStateFlow("")
     val passwordFlow = MutableStateFlow("")
     val companyNameFlow = MutableStateFlow("")
     val phoneNumberFlow = MutableStateFlow("")
     val passwordRepeatFlow = MutableStateFlow("")
 
+    val spheres = MutableStateFlow<List<Sphere>>(emptyList())
+    val spheresString = MutableStateFlow<List<String>>(emptyList())
+
     val navigateProfileScreenFlow = MutableSharedFlow<Unit>()
+
+    init {
+        sphereService.getAllSpheres().onEach {
+            when (it) {
+                is Result.Success -> {
+                    spheres.value = it.data
+                    successResult()
+                }
+                is Result.Failure -> failureResult(it.msg)
+                is Result.Loading -> loadingResult()
+                else -> {}
+            }
+        }.launchIn(viewModelScope)
+
+        spheres.onEach { spheres ->
+            spheresString.value = spheres.map { it.name }
+        }.launchIn(viewModelScope)
+    }
 
     fun onSignUpClicked() {
         if (checkDataValid()) {
+            val sphereId: String = spheres.value.firstOrNull { sphereNameFlow.value == it.name }?.id ?: return
             userService.createUserFlow(
-                User("", companyNameFlow.value, binFlow.value, sphereIdFlow.value, emailFlow.value, ""),
+                User("", companyNameFlow.value, binFlow.value, sphereId, emailFlow.value, ""),
                 passwordFlow.value
             ).onEach {
                 when (it) {
@@ -50,7 +72,7 @@ class RegistrationViewModel(
         binFlow.value.trim().isNotEmpty() &&
                 binFlow.value.trim().length == 12 &&
                 emailFlow.value.trim().isNotEmpty() &&
-                sphereIdFlow.value.trim().isNotEmpty() &&
+                sphereNameFlow.value.trim().isNotEmpty() &&
                 passwordFlow.value.trim().isNotEmpty() &&
                 companyNameFlow.value.trim().isNotEmpty() &&
                 phoneNumberFlow.value.trim().isNotEmpty() &&

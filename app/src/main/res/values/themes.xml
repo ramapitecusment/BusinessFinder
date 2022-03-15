@@ -71,6 +71,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <!--  Spinner  -->
+    <style name="Theme.BusinessFinder.TitleText.Spinner" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_marginStart">@dimen/default_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/default_margin_horizontal</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@drawable/background_spinner</item>
+    </style>
+
+    <!--  Button  -->
     <style name="Theme.BusinessFinder.Button">
         <item name="shapeAppearanceOverlay">@style/Theme.BusinessFinder.Button.Shape</item>
         <item name="backgroundColor">@color/colorAccent</item>

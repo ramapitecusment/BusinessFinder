@@ -2,10 +2,7 @@ package com.example.businessfinder
 
 import android.app.KeyguardManager
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -66,10 +63,9 @@ class MainActivity : AppCompatActivity() {
     private fun checkStartDestination() {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
         if (FirebaseAuth.getInstance().currentUser != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && checkBiometricSupport()) {
                 val biometricPrompt = BiometricPrompt.Builder(this)
                     .setTitle("Авторизация")
-                    .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
                     .setNegativeButton("Отмена", mainExecutor, { _, _ ->
                         graph.setStartDestination(R.id.loginFragment)
                     }).build()

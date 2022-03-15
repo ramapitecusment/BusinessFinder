@@ -20,8 +20,8 @@ var viewModelModule = module {
     viewModel { RequestViewModel(get()) }
     viewModel { CategoriesViewModel(get()) }
     viewModel { ChatViewModel(get(), get()) }
-    viewModel { RegistrationViewModel(get()) }
     viewModel { ChatChannelsViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
+    viewModel { RegistrationViewModel(get(), get()) }
     viewModel { OffersViewModel(get(), get(), get()) }
 }
