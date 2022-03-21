@@ -25,11 +25,11 @@ data class OfferListItem(
 
 @Parcelize
 data class SearchOffer(
-    val price: Int? = null,
-    val sphereId: String? = null,
+    var price: Int? = null,
+    var sphereId: String? = null,
     val ownerId: String? = null,
     val acceptedUserId: String? = null,
-    val dayDeadline: Int? = null,
-    val description: String? = null,
+    var dayDeadline: Int? = null,
+    var description: String? = null,
     val isDirectSearch: Boolean = false
 ) : Parcelable

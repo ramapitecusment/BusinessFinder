@@ -43,7 +43,12 @@ class RequestViewModel(
     }
 
     fun onSearchOfferClicked() {
-        navigateOffersScreen.safeEmit(SearchOffer())
+        val searchOffer = SearchOffer(isDirectSearch = true)
+        if (priceFlow.value.isNotEmpty()) searchOffer.price = priceFlow.value.toInt()
+        if (deadlineFlow.value.isNotEmpty()) searchOffer.dayDeadline = deadlineFlow.value.toInt()
+        if (sphereNameFlow.value.isNotEmpty()) searchOffer.sphereId = sphereNameFlow.value
+        if (descriptionFlow.value.isNotEmpty()) searchOffer.description = descriptionFlow.value
+        navigateOffersScreen.safeEmit(searchOffer)
     }
 
     private fun onGetSpheresResult(spheresResult: Result<List<Sphere>>) {

@@ -5,6 +5,7 @@ import com.example.businessfinder.common.extensions.snapshotAsFlow
 import com.example.businessfinder.models.Offer
 import com.example.businessfinder.models.Result
 import com.example.businessfinder.models.SearchOffer
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,16 +19,15 @@ class OfferService {
     private val TAG = this::class.java.simpleName
 
     fun getOffersByDirectSearch(searchOffer: SearchOffer): Flow<QuerySnapshot> {
-        val offersCollection = FirebaseServices.offersCollection
+        var offersCollection: Query = FirebaseServices.offersCollection
         if (searchOffer.price != null)
-            offersCollection.whereLessThanOrEqualTo("price", searchOffer.price)
-        if (searchOffer.sphereId != null)
-            offersCollection.whereEqualTo("sphereId", searchOffer.sphereId)
-        if (searchOffer.dayDeadline != null)
-            offersCollection.whereLessThanOrEqualTo("dayDeadline", searchOffer.dayDeadline)
+            offersCollection = offersCollection.whereLessThanOrEqualTo("price", searchOffer.price!!)
         if (searchOffer.description != null)
-            offersCollection.whereArrayContains("description", searchOffer.description)
-        return offersCollection.orderBy("id").snapshotAsFlow()
+            offersCollection = offersCollection.whereArrayContains("description", searchOffer.description!!)
+        if (searchOffer.sphereId != null)
+            offersCollection = offersCollection.whereEqualTo("sphereId", searchOffer.sphereId)
+        offersCollection = offersCollection.orderBy("price")
+        return offersCollection.snapshotAsFlow()
     }
 
     fun getOffersBySphere(sphereId: String) = FirebaseServices.offersCollection
