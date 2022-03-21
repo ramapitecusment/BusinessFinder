@@ -6,6 +6,7 @@ import com.example.businessfinder.models.*
 import com.example.businessfinder.services.OfferService
 import com.example.businessfinder.services.SphereService
 import com.example.businessfinder.services.UserService
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.joinAll
@@ -15,37 +16,29 @@ class OffersViewModel(
     private val offerService: OfferService,
     private val sphereService: SphereService,
 ) : BaseViewModel() {
-    var sphereId: String? = null
-    var ownerId: String? = null
-    var acceptedUserId: String? = null
+    private var searchOffer: SearchOffer? = null
 
     val title = MutableStateFlow("")
     val offers = MutableStateFlow<List<OfferListItem>>(emptyList())
 
     fun start(searchOffer: SearchOffer?) {
-        this.sphereId = searchOffer?.sphereId
-        this.ownerId = searchOffer?.ownerId
-        this.acceptedUserId = searchOffer?.acceptedUserId
+        this.searchOffer = searchOffer
         getOffers()
     }
 
-
     private fun getOffers() {
-        offersFlow().onEach { offersResult ->
-            when (offersResult) {
-                is Result.Success -> onGetOffersSuccess(offersResult.data)
-                is Result.Failure -> failureResult(offersResult.msg)
-                is Result.Loading -> loadingResult()
-                else -> {}
-            }
+        loadingResult()
+        offersFlow().onEach { snapshot ->
+            onGetOffersSuccess(snapshot.toObjects(Offer::class.java))
         }.launchIn(viewModelScope)
     }
 
-    private fun offersFlow(): Flow<Result<List<Offer>>> =
+    private fun offersFlow(): Flow<QuerySnapshot> =
         when {
-            sphereId != null -> offerService.getOffersBySphere(sphereId!!)
-            ownerId != null -> offerService.getOffersByOwnerId(ownerId!!)
-            acceptedUserId != null -> offerService.getOffersByAcceptedUserId(acceptedUserId!!)
+            searchOffer?.isDirectSearch == true -> offerService.getOffersByDirectSearch(searchOffer!!)
+            searchOffer?.sphereId != null -> offerService.getOffersBySphere(searchOffer?.sphereId!!)
+            searchOffer?.ownerId != null -> offerService.getOffersByOwnerId(searchOffer?.ownerId!!)
+            searchOffer?.acceptedUserId != null -> offerService.getOffersByAcceptedUserId(searchOffer?.acceptedUserId!!)
             else -> offerService.getAllOffers()
         }
 

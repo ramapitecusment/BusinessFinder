@@ -17,10 +17,10 @@ var viewModelModule = module {
     viewModel { OfferViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { SphereViewModel(get()) }
-    viewModel { RequestViewModel(get()) }
     viewModel { CategoriesViewModel(get()) }
     viewModel { ChatViewModel(get(), get()) }
     viewModel { ChatChannelsViewModel(get()) }
+    viewModel { RequestViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { RegistrationViewModel(get(), get()) }
     viewModel { OffersViewModel(get(), get(), get()) }

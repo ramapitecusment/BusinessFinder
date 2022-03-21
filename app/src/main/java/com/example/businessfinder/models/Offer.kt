@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Offer(
-    val id: String,
+    var id: String,
     val price: Int,
     val sphereId: String,
     val ownerId: String,
@@ -30,5 +30,6 @@ data class SearchOffer(
     val ownerId: String? = null,
     val acceptedUserId: String? = null,
     val dayDeadline: Int? = null,
-    val description: String? = null
+    val description: String? = null,
+    val isDirectSearch: Boolean = false
 ) : Parcelable

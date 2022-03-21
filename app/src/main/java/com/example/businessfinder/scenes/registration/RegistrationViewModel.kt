@@ -8,7 +8,6 @@ import com.example.businessfinder.models.User
 import com.example.businessfinder.services.SphereService
 import com.example.businessfinder.services.UserService
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 class RegistrationViewModel(
     sphereService: SphereService,
@@ -58,7 +57,7 @@ class RegistrationViewModel(
                     else -> {}
                 }
             }.launchIn(viewModelScope)
-        } else viewModelScope.launch { showToast.emit("Проверьте все ли поля заполнены корректно") }
+        } else showToast("Проверьте все ли поля заполнены корректно")
     }
 
     private fun checkDataValid(): Boolean =
@@ -74,6 +73,6 @@ class RegistrationViewModel(
 
     private fun onSignUpSuccess() {
         successResult()
-        viewModelScope.launch { navigateProfileScreenFlow.emit(Unit) }
+        navigateProfileScreenFlow.safeEmit(Unit)
     }
 }

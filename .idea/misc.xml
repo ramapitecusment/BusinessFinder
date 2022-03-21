@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.28854166666666664" />
         <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/fragment_request.xml" value="0.2817028985507246" />
         <entry key="app/src/main/res/layout/item_spinner.xml" value="0.28854166666666664" />
         <entry key="app/src/main/res/layout/loading_layout.xml" value="0.28854166666666664" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.28854166666666664" />

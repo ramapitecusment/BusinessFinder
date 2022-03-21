@@ -87,8 +87,6 @@ fun <T, TViewHolder : RecyclerView.ViewHolder?> Fragment.bindRecyclerViewAdapter
     adapter: ListAdapter<T, TViewHolder>,
     block: (() -> Unit)? = null
 ) = stateFlow.onEach {
-    if (it.isNotEmpty()) {
-        adapter.submitList(it)
-        if (block != null) block()
-    }
+    adapter.submitList(it)
+    if (block != null) block()
 }.launchWhenStarted(viewLifecycleOwner)

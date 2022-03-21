@@ -1,10 +1,13 @@
 package com.example.businessfinder.services
 
 import android.util.Log
+import com.example.businessfinder.common.extensions.snapshotAsFlow
 import com.example.businessfinder.models.Offer
 import com.example.businessfinder.models.Result
-import com.example.businessfinder.models.User
+import com.example.businessfinder.models.SearchOffer
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -14,39 +17,47 @@ class OfferService {
 
     private val TAG = this::class.java.simpleName
 
-    fun getOffersBySphere(sphereId: String) = flow<Result<List<Offer>>> {
-        emit(Result.Loading)
-        val data = FirebaseServices.offersCollection.whereEqualTo("sphereId", sphereId).get().await()
-        emit(Result.Success(data.toObjects(Offer::class.java)))
-    }.catch {
-        Log.e(TAG, "getOffersBySphere failure", it.fillInStackTrace())
-        emit(Result.Failure(it))
-    }.flowOn(Dispatchers.IO)
+    fun getOffersByDirectSearch(searchOffer: SearchOffer): Flow<QuerySnapshot> {
+        val offersCollection = FirebaseServices.offersCollection
+        if (searchOffer.price != null)
+            offersCollection.whereLessThanOrEqualTo("price", searchOffer.price)
+        if (searchOffer.sphereId != null)
+            offersCollection.whereEqualTo("sphereId", searchOffer.sphereId)
+        if (searchOffer.dayDeadline != null)
+            offersCollection.whereLessThanOrEqualTo("dayDeadline", searchOffer.dayDeadline)
+        if (searchOffer.description != null)
+            offersCollection.whereArrayContains("description", searchOffer.description)
+        return offersCollection.orderBy("id").snapshotAsFlow()
+    }
 
-    fun getOffersByOwnerId(ownerId: String) = flow<Result<List<Offer>>> {
-        emit(Result.Loading)
-        val data = FirebaseServices.offersCollection.whereEqualTo("ownerId", ownerId).get().await()
-        emit(Result.Success(data.toObjects(Offer::class.java)))
-    }.catch {
-        Log.e(TAG, "getOffersBySphere failure", it.fillInStackTrace())
-        emit(Result.Failure(it))
-    }.flowOn(Dispatchers.IO)
+    fun getOffersBySphere(sphereId: String) = FirebaseServices.offersCollection
+        .whereEqualTo("sphereId", sphereId)
+        .orderBy("id")
+        .snapshotAsFlow()
 
-    fun getOffersByAcceptedUserId(acceptedUserId: String) = flow<Result<List<Offer>>> {
-        emit(Result.Loading)
-        val data = FirebaseServices.offersCollection.whereArrayContains("acceptedUserIds", acceptedUserId).get().await()
-        emit(Result.Success(data.toObjects(Offer::class.java)))
-    }.catch {
-        Log.e(TAG, "getOffersBySphere failure", it.fillInStackTrace())
-        emit(Result.Failure(it))
-    }.flowOn(Dispatchers.IO)
+    fun getOffersByOwnerId(ownerId: String) = FirebaseServices.offersCollection
+        .whereEqualTo("ownerId", ownerId)
+        .orderBy("id")
+        .snapshotAsFlow()
 
-    fun getAllOffers() = flow<Result<List<Offer>>> {
+    fun getOffersByAcceptedUserId(acceptedUserId: String) = FirebaseServices.offersCollection
+        .whereArrayContains("acceptedUserIds", acceptedUserId)
+        .orderBy("id")
+        .snapshotAsFlow()
+
+    fun getAllOffers() = FirebaseServices.offersCollection
+        .orderBy("id")
+        .snapshotAsFlow()
+
+    fun createOffer(offer: Offer) = flow {
         emit(Result.Loading)
-        val data = FirebaseServices.offersCollection.get().await()
-        emit(Result.Success(data.toObjects(Offer::class.java)))
+        val offerDocument = FirebaseServices.offersCollection.document()
+        offer.id = offerDocument.id
+        val data = offerDocument.set(offer).await()
+        Log.d(TAG, "createOffer data: $data")
+        emit(Result.Success(Unit))
     }.catch {
-        Log.e(TAG, "getAllOffers failure", it.fillInStackTrace())
+        Log.e(TAG, "createOffer failure", it.fillInStackTrace())
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 
