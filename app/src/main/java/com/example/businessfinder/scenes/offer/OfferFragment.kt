@@ -19,7 +19,7 @@ class OfferFragment : BaseFragment<OfferViewModel, FragmentOfferBinding>(R.layou
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindView()
-        bindViewModel()
+        viewModel.init(args.offerItem)
     }
 
     private fun bindView() {
@@ -34,9 +34,5 @@ class OfferFragment : BaseFragment<OfferViewModel, FragmentOfferBinding>(R.layou
             acceptOfferButton.setOnClickListener { viewModel.onAcceptClicked() }
             declineOfferButton.setOnClickListener { viewModel.onDeclineClicked() }
         }
-    }
-
-    private fun bindViewModel() {
-
     }
 }

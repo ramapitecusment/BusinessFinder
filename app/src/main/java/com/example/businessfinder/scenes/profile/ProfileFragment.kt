@@ -12,6 +12,8 @@ import com.example.businessfinder.common.extensions.bindAction
 import com.example.businessfinder.common.extensions.bindProfileFirebaseImage
 import com.example.businessfinder.common.extensions.bindText
 import com.example.businessfinder.databinding.FragmentProfileBinding
+import com.example.businessfinder.models.SearchOffer
+import com.example.businessfinder.services.FirebaseServices
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(R.layout.fragment_profile) {
@@ -43,8 +45,15 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(R
         with(binding) {
             with(viewModel) {
                 exit.setOnClickListener { onExitClicked() }
-                offers.setOnClickListener {}
-                partners.setOnClickListener {}
+                offers.setOnClickListener {
+                    Navigator.goToOffersScreen(this@ProfileFragment, SearchOffer(ownerId = FirebaseServices.auth.uid!!))
+                }
+                partners.setOnClickListener {
+                    Navigator.goToOffersScreen(
+                        this@ProfileFragment,
+                        SearchOffer(acceptedUserId = FirebaseServices.auth.uid!!)
+                    )
+                }
                 changePhotoTextView.setOnClickListener { viewModel.changePhotoClicked() }
                 with(childFragmentManager) {
                     setFragmentResultListener(TAKE_PHOTO_KEY, this@ProfileFragment) { _, _ ->

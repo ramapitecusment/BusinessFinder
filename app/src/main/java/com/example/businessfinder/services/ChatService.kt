@@ -1,14 +1,8 @@
 package com.example.businessfinder.services
 
-import com.example.businessfinder.common.Constants
 import com.example.businessfinder.common.Constants.KEY_ENGAGED_CHAT_CHANNELS
 import com.example.businessfinder.common.extensions.snapshotAsFlow
 import com.example.businessfinder.models.ChatChannel
-import com.example.businessfinder.models.Message
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
 class ChatService {
 

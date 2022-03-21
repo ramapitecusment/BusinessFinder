@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.businessfinder.R
 import com.example.businessfinder.common.extensions.bindAction
@@ -20,6 +21,7 @@ abstract class BaseFragment<TViewModel : BaseViewModel, VB : ViewBinding>(@Layou
         super.onViewCreated(view, savedInstanceState)
         bindAction(viewModel.showToast) { Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show() }
         bindAction(viewModel.showLoading, ::onShowLoading)
+        bindAction(viewModel.popBack) { findNavController().popBackStack() }
     }
 
     private fun onShowLoading(isLoading: Boolean) {

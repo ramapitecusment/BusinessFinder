@@ -16,14 +16,19 @@ class OffersViewModel(
     private val sphereService: SphereService,
 ) : BaseViewModel() {
     var sphereId: String? = null
+    var ownerId: String? = null
+    var acceptedUserId: String? = null
 
     val title = MutableStateFlow("")
     val offers = MutableStateFlow<List<OfferListItem>>(emptyList())
 
     fun start(searchOffer: SearchOffer?) {
         this.sphereId = searchOffer?.sphereId
+        this.ownerId = searchOffer?.ownerId
+        this.acceptedUserId = searchOffer?.acceptedUserId
         getOffers()
     }
+
 
     private fun getOffers() {
         offersFlow().onEach { offersResult ->
@@ -37,8 +42,12 @@ class OffersViewModel(
     }
 
     private fun offersFlow(): Flow<Result<List<Offer>>> =
-        if (sphereId != null) offerService.getOffersBySphere(sphereId!!)
-        else offerService.getAllOffers()
+        when {
+            sphereId != null -> offerService.getOffersBySphere(sphereId!!)
+            ownerId != null -> offerService.getOffersByOwnerId(ownerId!!)
+            acceptedUserId != null -> offerService.getOffersByAcceptedUserId(acceptedUserId!!)
+            else -> offerService.getAllOffers()
+        }
 
     private suspend fun onGetOffersSuccess(offers: List<Offer>) {
         var isError = false
@@ -68,7 +77,6 @@ class OffersViewModel(
         this.offers.value = offerList.toList()
         jobList.clear()
         successResult()
-//        offerList.clear()
     }
 
 }

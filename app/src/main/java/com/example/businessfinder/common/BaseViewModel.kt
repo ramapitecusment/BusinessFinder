@@ -12,6 +12,7 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
     val showToast = MutableSharedFlow<String>()
     val showAlertDialog = MutableSharedFlow<AlertDialogModel>()
     val showLoading = MutableSharedFlow<Boolean>()
+    val popBack = MutableSharedFlow<Unit>()
 
     val TAG = this.javaClass.name
 
@@ -40,5 +41,9 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
 
     protected fun successResult() {
         hideLoading()
+    }
+
+    protected fun <T> MutableSharedFlow<T>.safeEmit(value: T) = viewModelScope.launch {
+        this@safeEmit.emit(value)
     }
 }
