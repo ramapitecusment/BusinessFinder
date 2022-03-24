@@ -35,7 +35,7 @@ class OffersViewModel(
 
     private fun offersFlow(): Flow<QuerySnapshot> =
         when {
-            searchOffer?.isDirectSearch == true -> offerService.getOffersByDirectSearch(searchOffer!!)
+            searchOffer?.isDirectSearch == true -> offerService.getOffersByPriceAndSphere(searchOffer!!)
             searchOffer?.sphereId != null -> offerService.getOffersBySphere(searchOffer?.sphereId!!)
             searchOffer?.ownerId != null -> offerService.getOffersByOwnerId(searchOffer?.ownerId!!)
             searchOffer?.acceptedUserId != null -> offerService.getOffersByAcceptedUserId(searchOffer?.acceptedUserId!!)

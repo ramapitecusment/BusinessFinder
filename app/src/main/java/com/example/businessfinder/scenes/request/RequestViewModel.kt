@@ -46,8 +46,9 @@ class RequestViewModel(
         val searchOffer = SearchOffer(isDirectSearch = true)
         if (priceFlow.value.isNotEmpty()) searchOffer.price = priceFlow.value.toInt()
         if (deadlineFlow.value.isNotEmpty()) searchOffer.dayDeadline = deadlineFlow.value.toInt()
-        if (sphereNameFlow.value.isNotEmpty()) searchOffer.sphereId = sphereNameFlow.value
         if (descriptionFlow.value.isNotEmpty()) searchOffer.description = descriptionFlow.value
+        if (sphereNameFlow.value.isNotEmpty())
+            searchOffer.sphereId = spheres.value.firstOrNull { sphereNameFlow.value == it.name }?.id
         navigateOffersScreen.safeEmit(searchOffer)
     }
 

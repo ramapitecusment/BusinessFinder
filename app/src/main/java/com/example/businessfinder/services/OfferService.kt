@@ -18,12 +18,10 @@ class OfferService {
 
     private val TAG = this::class.java.simpleName
 
-    fun getOffersByDirectSearch(searchOffer: SearchOffer): Flow<QuerySnapshot> {
+    fun getOffersByPriceAndSphere(searchOffer: SearchOffer): Flow<QuerySnapshot> {
         var offersCollection: Query = FirebaseServices.offersCollection
         if (searchOffer.price != null)
             offersCollection = offersCollection.whereLessThanOrEqualTo("price", searchOffer.price!!)
-        if (searchOffer.description != null)
-            offersCollection = offersCollection.whereArrayContains("description", searchOffer.description!!)
         if (searchOffer.sphereId != null)
             offersCollection = offersCollection.whereEqualTo("sphereId", searchOffer.sphereId)
         offersCollection = offersCollection.orderBy("price")
