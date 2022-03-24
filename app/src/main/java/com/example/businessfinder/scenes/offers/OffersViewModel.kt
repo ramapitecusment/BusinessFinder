@@ -48,6 +48,12 @@ class OffersViewModel(
         val offerList = mutableListOf<OfferListItem>()
         offers.forEach { offer ->
             if (isError) return
+            if (searchOffer?.isDirectSearch == true) {
+                if (searchOffer?.description?.isNotEmpty() == true)
+                    if (!offer.description.contains(searchOffer!!.description!!, ignoreCase = true)) return@forEach
+                if (searchOffer?.dayDeadline != null)
+                    if (offer.dayDeadline > searchOffer!!.dayDeadline!!) return@forEach
+            }
             jobList.add(
                 combine(
                     userService.getUserFlow(offer.ownerId),
