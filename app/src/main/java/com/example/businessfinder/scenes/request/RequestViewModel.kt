@@ -57,7 +57,6 @@ class RequestViewModel(
             is Result.Success -> onGetSpheresSuccess(spheresResult.data)
             is Result.Failure -> failureResult(spheresResult.msg)
             is Result.Loading -> loadingResult()
-            else -> {}
         }
     }
 
@@ -71,7 +70,6 @@ class RequestViewModel(
             is Result.Success -> onCreateOfferSuccess()
             is Result.Failure -> failureResult(result.msg)
             is Result.Loading -> loadingResult()
-            else -> {}
         }
     }
 

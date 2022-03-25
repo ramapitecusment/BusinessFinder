@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/drawable/background_transparent_bottom_dialog.xml" value="0.3046875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1408308004052685" />
         <entry key="app/src/main/res/layout/dialog_bottom_change_photo.xml" value="0.28854166666666664" />
+        <entry key="app/src/main/res/layout/fragment_analysis.xml" value="0.28854166666666664" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.22146739130434784" />
         <entry key="app/src/main/res/layout/fragment_chat_channels.xml" value="0.1408308004052685" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2509057971014493" />
