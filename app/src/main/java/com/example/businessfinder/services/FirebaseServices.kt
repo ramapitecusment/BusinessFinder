@@ -2,7 +2,6 @@ package com.example.businessfinder.services
 
 import com.example.businessfinder.common.Constants.KEY_CATEGORIES
 import com.example.businessfinder.common.Constants.KEY_CHAT_CHANNELS
-import com.example.businessfinder.common.Constants.KEY_ENGAGED_CHAT_CHANNELS
 import com.example.businessfinder.common.Constants.KEY_MESSAGES
 import com.example.businessfinder.common.Constants.KEY_OFFERS
 import com.example.businessfinder.common.Constants.KEY_SPHERES
@@ -17,7 +16,7 @@ object FirebaseServices {
     val auth
         get() = FirebaseAuth.getInstance()
 
-    val storage
+    private val storage
         get() = FirebaseStorage.getInstance()
 
     val usersCollection

@@ -24,8 +24,8 @@ class ChatViewModel(
 
     val title = MutableStateFlow("")
     val messageToSend = MutableStateFlow("")
-    val otherUser = MutableStateFlow<User?>(null)
     val messages = MutableStateFlow<List<Message>>(emptyList())
+    private val otherUser = MutableStateFlow<User?>(null)
 
     fun init(userUID: String) {
         if (this.otherUserUID != null) return

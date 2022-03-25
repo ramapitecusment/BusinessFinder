@@ -33,7 +33,6 @@ class SphereViewModel(
                 is Result.Success -> onGetSpheresSuccess(it.data)
                 is Result.Failure -> failureResult(it.msg)
                 is Result.Loading -> loadingResult()
-                else -> {}
             }
         }.launchIn(viewModelScope)
     }

@@ -36,7 +36,6 @@ class RegistrationViewModel(
                 }
                 is Result.Failure -> failureResult(it.msg)
                 is Result.Loading -> loadingResult()
-                else -> {}
             }
         }.launchIn(viewModelScope)
 
@@ -54,7 +53,6 @@ class RegistrationViewModel(
                     is Result.Success -> onSignUpSuccess()
                     is Result.Failure -> failureResult(it.msg)
                     is Result.Loading -> loadingResult()
-                    else -> {}
                 }
             }.launchIn(viewModelScope)
         } else showToast("Проверьте все ли поля заполнены корректно")

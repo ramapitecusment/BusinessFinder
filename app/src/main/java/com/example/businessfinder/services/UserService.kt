@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.*
 class UserService {
     private val TAG: String = this::class.java.name
 
-    // https://betterprogramming.pub/how-to-use-kotlin-coroutines-with-firebase-6f8577a3e00f
     fun createUserFlow(user: User, password: String): Flow<Result<Unit>> = flow {
         emit(Result.Loading)
         val data = FirebaseServices.auth.createUserWithEmailAndPassword(user.email, password).await()
@@ -35,7 +34,7 @@ class UserService {
         emit(Result.Failure(it))
     }.flowOn(Dispatchers.IO)
 
-    fun insertUserFlow(user: User): Flow<Result<Unit>> = flow {
+    private fun insertUserFlow(user: User): Flow<Result<Unit>> = flow {
         emit(Result.Loading)
         val documentId = FirebaseServices.auth.currentUser?.uid
         if (documentId == null) emit(Result.Failure(Throwable("User UID is null")))

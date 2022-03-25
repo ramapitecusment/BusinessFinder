@@ -33,7 +33,6 @@ class LoginViewModel(
                     is Result.Success -> signInSuccess()
                     is Result.Failure -> signInFailure(it.msg)
                     is Result.Loading -> loadingResult()
-                    else -> {}
                 }
             }.launchIn(viewModelScope)
         } else {

@@ -1,7 +1,6 @@
 package com.example.businessfinder.scenes.category
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.businessfinder.R

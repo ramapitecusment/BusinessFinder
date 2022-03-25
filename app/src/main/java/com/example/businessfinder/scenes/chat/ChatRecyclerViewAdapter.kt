@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.businessfinder.models.Message
-import com.google.firebase.auth.FirebaseAuth
 
 class ChatRecyclerViewAdapter(private val currentUser: String) : ListAdapter<Message, ChatViewHolder>(ChatCallback()) {
 

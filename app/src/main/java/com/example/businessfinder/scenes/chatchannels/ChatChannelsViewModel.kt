@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class ChatChannelsViewModel(
-    private val userService: UserService,
+    userService: UserService,
 ) : BaseViewModel() {
     val usersList = MutableStateFlow<List<User>>(listOf())
 

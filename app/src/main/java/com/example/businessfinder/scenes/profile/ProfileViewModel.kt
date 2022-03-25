@@ -44,7 +44,7 @@ class ProfileViewModel(
     val requestCameraPermissionFlow = MutableSharedFlow<Unit>()
     val requestReadStoragePermissionFlow = MutableSharedFlow<Unit>()
 
-    val userData = MutableStateFlow<User?>(null)
+    private val userData = MutableStateFlow<User?>(null)
 
     val navigateLoginScreenFlow = MutableSharedFlow<Unit>()
 
@@ -118,7 +118,6 @@ class ProfileViewModel(
                         is Result.Success -> onUploadImageSuccess(it.data)
                         is Result.Failure -> failureResult(it.msg)
                         is Result.Loading -> loadingResult()
-                        else -> {}
                     }
                 }
             }
@@ -152,7 +151,6 @@ class ProfileViewModel(
                 is Result.Success -> successResult()
                 is Result.Failure -> failureResult(it.msg)
                 is Result.Loading -> loadingResult()
-                else -> {}
             }
         }.launchIn(viewModelScope)
     }

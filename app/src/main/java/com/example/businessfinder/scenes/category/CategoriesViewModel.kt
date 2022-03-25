@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class CategoriesViewModel(
-    private val categoryService: CategoryService,
+    categoryService: CategoryService,
 ) : BaseViewModel() {
 
     val categories = MutableStateFlow<List<Category>>(emptyList())
@@ -21,7 +21,6 @@ class CategoriesViewModel(
                 is Result.Success -> onGetCategoriesSuccess(it.data)
                 is Result.Failure -> failureResult(it.msg)
                 is Result.Loading -> loadingResult()
-                else -> {}
             }
         }.launchIn(viewModelScope)
     }

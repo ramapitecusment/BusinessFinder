@@ -24,7 +24,6 @@ class OfferViewModel(
                 is Result.Success -> onEditSuccess("Добавлено")
                 is Result.Failure -> failureResult(it.msg)
                 is Result.Loading -> loadingResult()
-                else -> {}
             }
         }.launchIn(viewModelScope)
     }
@@ -35,7 +34,6 @@ class OfferViewModel(
                 is Result.Success -> onEditSuccess("Удалено")
                 is Result.Failure -> failureResult(it.msg)
                 is Result.Loading -> loadingResult()
-                else -> {}
             }
         }.launchIn(viewModelScope)
     }
