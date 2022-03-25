@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         checkStartDestination()
         biometricAuthentication()
         setupNavController()
-        binding.toolbar.setTitleTextColor(resources.getColor(R.color.colorAccent))
+        binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccent))
     }
 
     private fun checkStartDestination() {
@@ -127,10 +127,6 @@ class MainActivity : AppCompatActivity() {
             Log.d("Biometric", "Авторизация по биометрии отменена пользователем")
         }
         return cancellationSignal as CancellationSignal
-    }
-
-    private fun showToast(text: String) {
-        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
     }
 
 }
