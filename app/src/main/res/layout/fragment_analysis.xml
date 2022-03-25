@@ -38,8 +38,8 @@
 
             <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
                 android:id="@+id/offersRespondPie"
-                android:layout_width="150dp"
-                android:layout_height="200dp" />
+                android:layout_width="170dp"
+                android:layout_height="230dp" />
 
             <TextView
                 android:id="@+id/offersRespond"

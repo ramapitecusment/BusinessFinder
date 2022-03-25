@@ -2,6 +2,7 @@ package com.example.businessfinder.scenes.offers
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.businessfinder.R
@@ -30,6 +31,17 @@ class OffersFragment : BaseFragment<OffersViewModel, FragmentOffersBinding>(R.la
 
     private fun bindView() {
         binding.offersRecyclerView.adapter = adapter
+        binding.offersSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.onSearchTextChanged(newText ?: "")
+                return true
+            }
+
+        })
     }
 
     private fun bindViewModel() {

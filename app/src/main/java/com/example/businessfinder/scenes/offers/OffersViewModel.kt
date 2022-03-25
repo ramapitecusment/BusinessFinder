@@ -7,6 +7,7 @@ import com.example.businessfinder.services.OfferService
 import com.example.businessfinder.services.SphereService
 import com.example.businessfinder.services.UserService
 import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.joinAll
@@ -17,9 +18,16 @@ class OffersViewModel(
     private val sphereService: SphereService,
 ) : BaseViewModel() {
     private var searchOffer: SearchOffer? = null
+    private var fetchedList: List<OfferListItem> = emptyList()
 
     val title = MutableStateFlow("")
     val offers = MutableStateFlow<List<OfferListItem>>(emptyList())
+    val filteredOffers = MutableStateFlow<List<OfferListItem>>(emptyList())
+    private val searchFlow = MutableStateFlow("")
+
+    init {
+        searchFlow.debounce(600).onEach(::filter).launchIn(viewModelScope)
+    }
 
     fun start(searchOffer: SearchOffer?) {
         this.searchOffer = searchOffer
@@ -73,9 +81,20 @@ class OffersViewModel(
             )
         }
         jobList.joinAll()
-        this.offers.value = offerList.toList()
+        val list = offerList.toList()
+        this.offers.value = list
+        fetchedList = list
         jobList.clear()
         successResult()
+    }
+
+    fun onSearchTextChanged(text: String) {
+        searchFlow.value = text
+    }
+
+    private fun filter(text: String) {
+        if (text.isEmpty()) offers.value = fetchedList
+        else offers.value = fetchedList.filter { it.offer.description.contains(text, true) }
     }
 
 }
