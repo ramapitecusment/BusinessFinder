@@ -25,13 +25,12 @@ abstract class BaseFragment<TViewModel : BaseViewModel, VB : ViewBinding>(@Layou
     }
 
     private fun onShowLoading(isLoading: Boolean) {
+        progressDialog?.dismiss()
         if (isLoading) {
             val builder = AlertDialog.Builder(requireContext(), R.style.TransparentBottomSheetDialogTheme)
             builder.setView(layoutInflater.inflate(R.layout.loading_layout, null))
             progressDialog = builder.create()
             progressDialog?.show()
-        } else {
-            progressDialog?.dismiss()
         }
     }
 

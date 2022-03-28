@@ -22,11 +22,11 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
         viewModelScope.launch { showToast.emit(message) }
     }
 
-    protected fun showLoading() {
+    private fun showLoading() {
         viewModelScope.launch { showLoading.emit(true) }
     }
 
-    protected fun hideLoading() {
+    private fun hideLoading() {
         viewModelScope.launch { showLoading.emit(false) }
     }
 
@@ -37,6 +37,7 @@ abstract class BaseViewModel : AndroidViewModel(MainApplication.instance) {
     protected fun failureResult(e: Throwable) {
         hideLoading()
         Log.d(TAG, e.toString())
+        showToast(e.toString())
     }
 
     protected fun successResult() {
