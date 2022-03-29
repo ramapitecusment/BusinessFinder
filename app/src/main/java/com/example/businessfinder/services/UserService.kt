@@ -15,7 +15,7 @@ class UserService {
         emit(Result.Loading)
         val data = FirebaseServices.auth.createUserWithEmailAndPassword(user.email, password).await()
         Log.d(TAG, "createUser success data: $data, user: ${FirebaseServices.auth.currentUser}")
-        user.firebaseUID = FirebaseServices.auth.currentUser?.uid.toString()
+        user.firebaseUID = FirebaseServices.auth.currentUser!!.uid
         emit(Result.Success(Unit))
     }.flatMapLatest {
         insertUserFlow(user)

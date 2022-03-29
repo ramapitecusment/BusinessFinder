@@ -42,4 +42,5 @@ class ChatFragment : BaseFragment<ChatViewModel, FragmentChatBinding>(R.layout.f
             binding.chatRecyclerView.scrollToPosition(adapter.itemCount - 1)
         }
     }
+
 }
